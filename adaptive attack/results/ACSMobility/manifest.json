@@ -1,0 +1,53 @@
+{
+  "all_features": {
+    "target_sha256": "a794ffd29f43b398f07c394428757fc622a40386d0afc0792ecb35daa30b03c5",
+    "references": {
+      "ref0": "3e3444f9cdb2b46e76199647a37889f69aeca9ae93d6a52d4f4baa0270b01ab6",
+      "ref1": "910f1693c22c3f7601fa1bc52ace0db85e2c3df21c9662503e58d5b01a2884e3",
+      "ref2": "dca026b9e7e28dd7a0455f433481b27af188c245d3756cee6aab782d4a2fb300",
+      "ref3": "756c2a96ad5d987b6ccccb41a6440e1c9060f4720b79788d3594d966e36b3c9a",
+      "ref4": "bf254fb83783714a27bcbb2a2fb1ddfd418bc9ccbe315d727829b9f1ac365c31",
+      "ref5": "e44f1289b848994b104bb25877bbe274b6eeb32bcc54ef26a59743eff95c47ca",
+      "ref6": "dd3153bb1fe88739150a64a091254f8ca46743f4abba46383c6cd826d07ef2b8",
+      "ref7": "ba541cdd8d1a44c0812f1d232aff5a9e0074ca369da13c42314fb85bb3169742"
+    }
+  },
+  "label_parents": {
+    "target_sha256": "6c77cf286141fb2070d43176e412bc8bf46fdcbee58ef871d6e912d8fc317d58",
+    "references": {
+      "ref0": "6017f565dcff63b9b8b6fabd523abee8a789d6cddf0d7c772af4f0cebf33c8fd",
+      "ref1": "c769d957529c708e0916b755293ef1e249a6959d4b312efdeca5a8a9b70a8526",
+      "ref2": "91960bd0b64696b4387dbb330310a9f5ddca31b3a6c7f7b9ed2216494c7aa956",
+      "ref3": "c4f70b5c0be6879142d15315282ad7c7bf1bb64b88d297923d5793f24a17c7f7",
+      "ref4": "d56d8752748d9e604b43b7ec0a39553d58de27ea3a621142d4636f14a3bd4c15",
+      "ref5": "7fdd3d488642fd3593cf6bcb8d330b768a00c180cafc19e621ebe2d3a094941a",
+      "ref6": "763d3e020cc703d867a245dedc4205d038bbae9cbbcc36db14e0a03db4d54b1d",
+      "ref7": "20120e1f56459f6771e011ff6c0a5ddd5328194aa3201642a2fdda1a6e41b0fa"
+    }
+  },
+  "markov_blanket": {
+    "target_sha256": "293607048054c5c5f4106295ad1950f31cb06f1e50f762bc99d8352a6d027a59",
+    "references": {
+      "ref0": "6017f565dcff63b9b8b6fabd523abee8a789d6cddf0d7c772af4f0cebf33c8fd",
+      "ref1": "c769d957529c708e0916b755293ef1e249a6959d4b312efdeca5a8a9b70a8526",
+      "ref2": "91960bd0b64696b4387dbb330310a9f5ddca31b3a6c7f7b9ed2216494c7aa956",
+      "ref3": "c4f70b5c0be6879142d15315282ad7c7bf1bb64b88d297923d5793f24a17c7f7",
+      "ref4": "d56d8752748d9e604b43b7ec0a39553d58de27ea3a621142d4636f14a3bd4c15",
+      "ref5": "7fdd3d488642fd3593cf6bcb8d330b768a00c180cafc19e621ebe2d3a094941a",
+      "ref6": "763d3e020cc703d867a245dedc4205d038bbae9cbbcc36db14e0a03db4d54b1d",
+      "ref7": "20120e1f56459f6771e011ff6c0a5ddd5328194aa3201642a2fdda1a6e41b0fa"
+    }
+  },
+  "data_sha256": "79fdb280e1ab285067b9b96e6a8c71f18a6065f7e5c04b9cae9442188cbd4f66",
+  "graph_sha256": "ad13820b04aa667c5586c9849fd96213334588197ed4b03de169eb5c94af7b5b",
+  "baseline_csv_sha256": "7948fe16339cb7717096dcf15a4018fa174ae848221b5dfdb9fd1818fbc800bc",
+  "source": ".",
+  "versions": {
+    "numpy": "1.26.4",
+    "pandas": "2.0.3",
+    "torch": "2.2.2",
+    "pgmpy": "0.1.25",
+    "folktables": "0.0.12"
+  },
+  "status": "completed"
+}

@@ -1,0 +1,4 @@
+dataset,experiment,feature_count,retained_features,target_train_accuracy,target_test_accuracy,rmia_auc,rmia_best_accuracy,tpr_at_1pct_fpr,tpr_at_0_1pct_fpr,rmia_a,gamma,reference_count,seed,epochs,distribution
+ACSPublicCoverage,all_features,19,"[""AGEP"", ""SCHL"", ""MAR"", ""SEX"", ""DIS"", ""ESP"", ""CIT"", ""MIG"", ""MIL"", ""ANC"", ""NATIVITY"", ""DEAR"", ""DEYE"", ""DREM"", ""PINCP"", ""ESR"", ""ST"", ""FER"", ""RAC1P""]",0.9666,0.6417,0.7294449150000001,0.67475,0.0463,0.009,0.1,2.0,8,42,100,same_state_year
+ACSPublicCoverage,label_parents,2,"[""DIS"", ""ESR""]",0.6773,0.6731,0.502769005,0.50435,0.0106,0.0003,0.1,2.0,8,42,100,same_state_year
+ACSPublicCoverage,markov_blanket,3,"[""DIS"", ""PINCP"", ""ESR""]",0.6849,0.679,0.504924665,0.5054,0.0099,0.0013,0.1,2.0,8,42,100,same_state_year

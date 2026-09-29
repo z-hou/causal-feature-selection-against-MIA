@@ -1,0 +1,4 @@
+dataset,experiment,feature_count,retained_features,target_train_accuracy,target_test_accuracy,rmia_auc,rmia_best_accuracy,tpr_at_1pct_fpr,tpr_at_0_1pct_fpr,rmia_a,gamma,reference_count,seed,epochs,distribution
+ACSEmployment,all_features,16,"[""AGEP"", ""SCHL"", ""MAR"", ""RELP"", ""DIS"", ""ESP"", ""CIT"", ""MIG"", ""MIL"", ""ANC"", ""NATIVITY"", ""DEAR"", ""DEYE"", ""DREM"", ""SEX"", ""RAC1P""]",0.983,0.7337,0.6918868600000001,0.6377,0.0567,0.0143,0.1,2.0,8,42,100,same_state_year
+ACSEmployment,label_parents,2,"[""AGEP"", ""MIL""]",0.7515,0.7582,0.498644765,0.503,0.0114,0.0013,0.1,2.0,8,42,100,same_state_year
+ACSEmployment,markov_blanket,4,"[""AGEP"", ""DIS"", ""MIL"", ""NATIVITY""]",0.7781,0.7812,0.500227075,0.50275,0.0123,0.0008,0.1,2.0,8,42,100,same_state_year

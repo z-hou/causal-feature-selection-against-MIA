@@ -1,0 +1,481 @@
+{
+  "nodes": [
+    "Gender",
+    "Age",
+    "Annual Vacation Days",
+    "Average Monthly Spend on Entertainment",
+    "Number of Online Purchases in Last Month",
+    "Number of Charity Donations in Last Year",
+    "Average Weekly Exercise Hours",
+    "Investment Portfolio Value",
+    "Health Consciousness Rating",
+    "Education Level",
+    "Average Daily Screen Time",
+    "Environmental Awareness Rating",
+    "Social Media Influence Score",
+    "Risk Tolerance in Investments",
+    "Number of Professional Trainings Attended",
+    "Tech-Savviness Score",
+    "Financial Wellness Index",
+    "Lifestyle Balance Score",
+    "Entertainment Engagement Factor",
+    "Social Responsibility Index",
+    "Work-Life Balance Indicator",
+    "Investment Risk Appetite",
+    "Eco-Consciousness Metric",
+    "Stress Management Score",
+    "Time Management Skill",
+    "__label__"
+  ],
+  "edges": [
+    [
+      "Annual Vacation Days",
+      "Lifestyle Balance Score"
+    ],
+    [
+      "Average Daily Screen Time",
+      "Number of Professional Trainings Attended"
+    ],
+    [
+      "Average Monthly Spend on Entertainment",
+      "Entertainment Engagement Factor"
+    ],
+    [
+      "Average Weekly Exercise Hours",
+      "Eco-Consciousness Metric"
+    ],
+    [
+      "Average Weekly Exercise Hours",
+      "Number of Charity Donations in Last Year"
+    ],
+    [
+      "Eco-Consciousness Metric",
+      "Annual Vacation Days"
+    ],
+    [
+      "Eco-Consciousness Metric",
+      "Social Responsibility Index"
+    ],
+    [
+      "Eco-Consciousness Metric",
+      "Work-Life Balance Indicator"
+    ],
+    [
+      "Entertainment Engagement Factor",
+      "Social Media Influence Score"
+    ],
+    [
+      "Entertainment Engagement Factor",
+      "Stress Management Score"
+    ],
+    [
+      "Environmental Awareness Rating",
+      "Health Consciousness Rating"
+    ],
+    [
+      "Investment Portfolio Value",
+      "Education Level"
+    ],
+    [
+      "Investment Portfolio Value",
+      "__label__"
+    ],
+    [
+      "Investment Risk Appetite",
+      "Risk Tolerance in Investments"
+    ],
+    [
+      "Lifestyle Balance Score",
+      "Stress Management Score"
+    ],
+    [
+      "Number of Charity Donations in Last Year",
+      "Eco-Consciousness Metric"
+    ],
+    [
+      "Number of Charity Donations in Last Year",
+      "Entertainment Engagement Factor"
+    ],
+    [
+      "Number of Charity Donations in Last Year",
+      "Lifestyle Balance Score"
+    ],
+    [
+      "Number of Charity Donations in Last Year",
+      "Social Responsibility Index"
+    ],
+    [
+      "Number of Online Purchases in Last Month",
+      "Investment Risk Appetite"
+    ],
+    [
+      "Number of Online Purchases in Last Month",
+      "Tech-Savviness Score"
+    ],
+    [
+      "Social Media Influence Score",
+      "Health Consciousness Rating"
+    ],
+    [
+      "Social Responsibility Index",
+      "Time Management Skill"
+    ],
+    [
+      "Social Responsibility Index",
+      "Work-Life Balance Indicator"
+    ],
+    [
+      "Time Management Skill",
+      "Number of Professional Trainings Attended"
+    ],
+    [
+      "__label__",
+      "Average Daily Screen Time"
+    ],
+    [
+      "__label__",
+      "Average Monthly Spend on Entertainment"
+    ],
+    [
+      "__label__",
+      "Average Weekly Exercise Hours"
+    ],
+    [
+      "__label__",
+      "Environmental Awareness Rating"
+    ],
+    [
+      "__label__",
+      "Financial Wellness Index"
+    ],
+    [
+      "__label__",
+      "Number of Charity Donations in Last Year"
+    ],
+    [
+      "__label__",
+      "Risk Tolerance in Investments"
+    ],
+    [
+      "__label__",
+      "Social Media Influence Score"
+    ],
+    [
+      "__label__",
+      "Tech-Savviness Score"
+    ]
+  ],
+  "feature_sets": {
+    "all_features": [
+      "Gender",
+      "Age",
+      "Annual Vacation Days",
+      "Average Monthly Spend on Entertainment",
+      "Number of Online Purchases in Last Month",
+      "Number of Charity Donations in Last Year",
+      "Average Weekly Exercise Hours",
+      "Investment Portfolio Value",
+      "Health Consciousness Rating",
+      "Education Level",
+      "Average Daily Screen Time",
+      "Environmental Awareness Rating",
+      "Social Media Influence Score",
+      "Risk Tolerance in Investments",
+      "Number of Professional Trainings Attended",
+      "Tech-Savviness Score",
+      "Financial Wellness Index",
+      "Lifestyle Balance Score",
+      "Entertainment Engagement Factor",
+      "Social Responsibility Index",
+      "Work-Life Balance Indicator",
+      "Investment Risk Appetite",
+      "Eco-Consciousness Metric",
+      "Stress Management Score",
+      "Time Management Skill"
+    ],
+    "label_parents": [
+      "Investment Portfolio Value"
+    ],
+    "markov_blanket": [
+      "Average Monthly Spend on Entertainment",
+      "Number of Online Purchases in Last Month",
+      "Number of Charity Donations in Last Year",
+      "Average Weekly Exercise Hours",
+      "Investment Portfolio Value",
+      "Average Daily Screen Time",
+      "Environmental Awareness Rating",
+      "Social Media Influence Score",
+      "Risk Tolerance in Investments",
+      "Tech-Savviness Score",
+      "Financial Wellness Index",
+      "Entertainment Engagement Factor",
+      "Investment Risk Appetite"
+    ]
+  },
+  "mode": "fresh",
+  "method": "discrete BIC hill climb",
+  "bins": 5,
+  "max_indegree": 3,
+  "max_iter": 10000,
+  "data_sha256": "1d8562ae82072ef478271cf419a71a51daa0a785d4222014f27c3c17f1e776c9",
+  "discretization": {
+    "Gender": {
+      "states": [
+        "female",
+        "male"
+      ]
+    },
+    "Age": {
+      "edges": [
+        19.0,
+        26.0,
+        32.0,
+        38.0,
+        46.0,
+        88.0
+      ]
+    },
+    "Annual Vacation Days": {
+      "edges": [
+        0.0,
+        8.4837,
+        16.0258,
+        22.05762,
+        29.549900000000008,
+        103.1168
+      ]
+    },
+    "Average Monthly Spend on Entertainment": {
+      "edges": [
+        0.0,
+        8.08716,
+        11.69138,
+        27.863620000000008,
+        42.19804,
+        159.5443
+      ]
+    },
+    "Number of Online Purchases in Last Month": {
+      "edges": [
+        34.6499,
+        109.286,
+        126.46396,
+        142.36658,
+        161.29094,
+        254.1667
+      ]
+    },
+    "Number of Charity Donations in Last Year": {
+      "edges": [
+        0.0,
+        0.0424,
+        0.4849,
+        5.69
+      ]
+    },
+    "Average Weekly Exercise Hours": {
+      "edges": [
+        0.0,
+        0.033560000000000034,
+        0.0928,
+        0.6328,
+        8.3377
+      ]
+    },
+    "Investment Portfolio Value": {
+      "edges": [
+        0.0,
+        3.8695800000000005,
+        8.94704,
+        13.250560000000004,
+        24.610640000000032,
+        777.5941
+      ]
+    },
+    "Health Consciousness Rating": {
+      "edges": [
+        0.0,
+        0.63558,
+        0.7101,
+        0.7768400000000001,
+        1.00066,
+        8.6794
+      ]
+    },
+    "Education Level": {
+      "edges": [
+        0.0,
+        3.45378,
+        5.3647599999999995,
+        7.10468,
+        8.95162,
+        14.5239
+      ]
+    },
+    "Average Daily Screen Time": {
+      "edges": [
+        0.0,
+        2.7118400000000005,
+        3.97156,
+        5.0932,
+        6.37886,
+        13.5869
+      ]
+    },
+    "Environmental Awareness Rating": {
+      "edges": [
+        0.0,
+        0.5418,
+        0.63536,
+        0.8809,
+        2.22812,
+        9.8716
+      ]
+    },
+    "Social Media Influence Score": {
+      "edges": [
+        0.0,
+        3.10394,
+        4.10798,
+        5.66692,
+        9.613440000000002,
+        44.29
+      ]
+    },
+    "Risk Tolerance in Investments": {
+      "edges": [
+        0.0,
+        4.21498,
+        5.2004,
+        6.764000000000001,
+        10.009020000000007,
+        34.5612
+      ]
+    },
+    "Number of Professional Trainings Attended": {
+      "edges": [
+        0.0,
+        1.9573600000000002,
+        2.8968599999999998,
+        3.5083200000000003,
+        4.19638,
+        10.1167
+      ]
+    },
+    "Tech-Savviness Score": {
+      "edges": [
+        6.7994,
+        12.54796,
+        13.55222,
+        14.51654,
+        16.59064,
+        36.4981
+      ]
+    },
+    "Financial Wellness Index": {
+      "edges": [
+        0.0,
+        90.3496,
+        97.79796,
+        101.36561999999999,
+        117.08064000000006,
+        444.034
+      ]
+    },
+    "Lifestyle Balance Score": {
+      "edges": [
+        0.0,
+        7.711539999999999,
+        16.846220000000002,
+        23.53836,
+        31.553780000000007,
+        57.6281
+      ]
+    },
+    "Entertainment Engagement Factor": {
+      "edges": [
+        0.3328,
+        1.5686200000000001,
+        1.7924,
+        1.93348,
+        2.10962,
+        3.02
+      ]
+    },
+    "Social Responsibility Index": {
+      "edges": [
+        0.0,
+        0.028540000000000055,
+        0.10474000000000014,
+        15.3711
+      ]
+    },
+    "Work-Life Balance Indicator": {
+      "edges": [
+        0.0,
+        0.0039,
+        0.0306,
+        0.17584000000000005,
+        0.5311800000000007,
+        1.4452
+      ]
+    },
+    "Investment Risk Appetite": {
+      "edges": [
+        0.0,
+        1.1995400000000003,
+        3.6375,
+        5.787520000000001,
+        7.0803400000000005,
+        8.862
+      ]
+    },
+    "Eco-Consciousness Metric": {
+      "edges": [
+        0.0,
+        0.0026,
+        0.0132,
+        0.048740000000000144,
+        2.2934
+      ]
+    },
+    "Stress Management Score": {
+      "edges": [
+        0.0,
+        2.2328799999999998,
+        2.80528,
+        3.33802,
+        4.042760000000001,
+        9.1208
+      ]
+    },
+    "Time Management Skill": {
+      "edges": [
+        0.0,
+        8.683060000000001,
+        20.950840000000003,
+        35.98556,
+        66.1743800000001,
+        110.0428
+      ]
+    },
+    "__label__": {
+      "states": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    }
+  },
+  "pythonhashseed": "0",
+  "note": "Observational candidate DAG; edge directions are not established causal mechanisms."
+}

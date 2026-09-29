@@ -1,0 +1,19 @@
+{
+  "status": "completed",
+  "date": "2026-09-29",
+  "command": "python -u 'random selection/run.py'",
+  "exit_code": 0,
+  "selection_pool": "all original input features",
+  "sampling": "without replacement; independent default_rng(42) per dataset",
+  "attack": "non_adaptive RMIA; 8 unchanged full-feature references per dataset",
+  "dataset_count": 7,
+  "csv_rows": 28,
+  "verification": "All seven datasets passed verify.py; original MB metrics reproduced within 1e-12",
+  "files_sha256": {
+    "experiment_core.py": "b0ed348317b3fbc596b9b5f5e680e69e136e2b89718130bab729a24ed46e4158",
+    "experiment_utils.py": "b8b23c89696f319c8b8601dd9858ed1ab82a723f7b954ed7f1318684d5e0f088",
+    "run.py": "7e53ac6fc5550983a450607b3a0af26a272351e1e57e7156090e55fc313dc0dd",
+    "verify.py": "9a5fa51899a6afdcbf009e9c6a5ce5c7c3d433ca0d595102ddf3240f386d0b88",
+    "results/comparison.csv": "aff12d1085f52a58ac8e0f0342c033373444518048a8bd0f00215097ec843131"
+  }
+}

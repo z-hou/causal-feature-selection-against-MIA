@@ -1,0 +1,385 @@
+{
+  "nodes": [
+    "AGEP",
+    "SCHL",
+    "MAR",
+    "SEX",
+    "DIS",
+    "ESP",
+    "CIT",
+    "MIL",
+    "ANC",
+    "NATIVITY",
+    "RELP",
+    "DEAR",
+    "DEYE",
+    "DREM",
+    "RAC1P",
+    "GCL",
+    "COW",
+    "ESR",
+    "WKHP",
+    "JWMNP",
+    "PINCP",
+    "__label__"
+  ],
+  "edges": [
+    [
+      "AGEP",
+      "GCL"
+    ],
+    [
+      "AGEP",
+      "PINCP"
+    ],
+    [
+      "CIT",
+      "NATIVITY"
+    ],
+    [
+      "DEAR",
+      "DREM"
+    ],
+    [
+      "DEYE",
+      "DREM"
+    ],
+    [
+      "DIS",
+      "DEAR"
+    ],
+    [
+      "DIS",
+      "DEYE"
+    ],
+    [
+      "DIS",
+      "DREM"
+    ],
+    [
+      "ESR",
+      "COW"
+    ],
+    [
+      "ESR",
+      "DIS"
+    ],
+    [
+      "ESR",
+      "MIL"
+    ],
+    [
+      "ESR",
+      "PINCP"
+    ],
+    [
+      "ESR",
+      "WKHP"
+    ],
+    [
+      "JWMNP",
+      "ESR"
+    ],
+    [
+      "MAR",
+      "RELP"
+    ],
+    [
+      "MAR",
+      "SEX"
+    ],
+    [
+      "NATIVITY",
+      "ANC"
+    ],
+    [
+      "NATIVITY",
+      "DIS"
+    ],
+    [
+      "NATIVITY",
+      "MAR"
+    ],
+    [
+      "NATIVITY",
+      "RAC1P"
+    ],
+    [
+      "PINCP",
+      "SCHL"
+    ],
+    [
+      "PINCP",
+      "WKHP"
+    ],
+    [
+      "RAC1P",
+      "ANC"
+    ],
+    [
+      "RELP",
+      "AGEP"
+    ],
+    [
+      "RELP",
+      "JWMNP"
+    ],
+    [
+      "RELP",
+      "__label__"
+    ],
+    [
+      "WKHP",
+      "SEX"
+    ]
+  ],
+  "feature_sets": {
+    "all_features": [
+      "AGEP",
+      "SCHL",
+      "MAR",
+      "SEX",
+      "DIS",
+      "ESP",
+      "CIT",
+      "MIL",
+      "ANC",
+      "NATIVITY",
+      "RELP",
+      "DEAR",
+      "DEYE",
+      "DREM",
+      "RAC1P",
+      "GCL",
+      "COW",
+      "ESR",
+      "WKHP",
+      "JWMNP",
+      "PINCP"
+    ],
+    "label_parents": [
+      "RELP"
+    ],
+    "markov_blanket": [
+      "RELP"
+    ]
+  },
+  "mode": "fresh",
+  "method": "discrete BIC hill climb",
+  "bins": 5,
+  "max_indegree": 3,
+  "max_iter": 10000,
+  "data_sha256": "79fdb280e1ab285067b9b96e6a8c71f18a6065f7e5c04b9cae9442188cbd4f66",
+  "discretization": {
+    "AGEP": {
+      "edges": [
+        19.0,
+        22.0,
+        25.0,
+        28.0,
+        31.0,
+        34.0
+      ]
+    },
+    "SCHL": {
+      "states": [
+        1.0,
+        2.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0,
+        8.0,
+        9.0,
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0,
+        16.0,
+        17.0,
+        18.0,
+        19.0,
+        20.0,
+        21.0,
+        22.0,
+        23.0,
+        24.0
+      ]
+    },
+    "MAR": {
+      "states": [
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0
+      ]
+    },
+    "SEX": {
+      "states": [
+        1.0,
+        2.0
+      ]
+    },
+    "DIS": {
+      "states": [
+        1.0,
+        2.0
+      ]
+    },
+    "ESP": {
+      "states": [
+        0.0
+      ]
+    },
+    "CIT": {
+      "states": [
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0
+      ]
+    },
+    "MIL": {
+      "states": [
+        1.0,
+        2.0,
+        3.0,
+        4.0
+      ]
+    },
+    "ANC": {
+      "states": [
+        1.0,
+        2.0,
+        3.0,
+        4.0
+      ]
+    },
+    "NATIVITY": {
+      "states": [
+        1.0,
+        2.0
+      ]
+    },
+    "RELP": {
+      "states": [
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        7.0,
+        9.0,
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0,
+        16.0,
+        17.0
+      ]
+    },
+    "DEAR": {
+      "states": [
+        1.0,
+        2.0
+      ]
+    },
+    "DEYE": {
+      "states": [
+        1.0,
+        2.0
+      ]
+    },
+    "DREM": {
+      "states": [
+        1.0,
+        2.0
+      ]
+    },
+    "RAC1P": {
+      "states": [
+        1.0,
+        2.0,
+        3.0,
+        5.0,
+        6.0,
+        7.0,
+        8.0,
+        9.0
+      ]
+    },
+    "GCL": {
+      "states": [
+        0.0,
+        1.0,
+        2.0
+      ]
+    },
+    "COW": {
+      "states": [
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0,
+        8.0,
+        9.0
+      ]
+    },
+    "ESR": {
+      "states": [
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        6.0
+      ]
+    },
+    "WKHP": {
+      "edges": [
+        0.0,
+        12.0,
+        30.0,
+        40.0,
+        99.0
+      ]
+    },
+    "JWMNP": {
+      "edges": [
+        0.0,
+        10.0,
+        20.0,
+        30.0,
+        141.0
+      ]
+    },
+    "PINCP": {
+      "edges": [
+        -4800.0,
+        3700.0,
+        15000.0,
+        28800.0,
+        52000.0,
+        725000.0
+      ]
+    },
+    "__label__": {
+      "states": [
+        0,
+        1
+      ]
+    }
+  },
+  "pythonhashseed": "0",
+  "note": "Observational candidate DAG; edge directions are not established causal mechanisms."
+}

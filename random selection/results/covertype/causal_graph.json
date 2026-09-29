@@ -1,0 +1,933 @@
+{
+  "nodes": [
+    "Elevation",
+    "Aspect",
+    "Slope",
+    "Horizontal_Distance_To_Hydrology",
+    "Vertical_Distance_To_Hydrology",
+    "Horizontal_Distance_To_Roadways",
+    "Hillshade_9am",
+    "Hillshade_Noon",
+    "Hillshade_3pm",
+    "Horizontal_Distance_To_Fire_Points",
+    "Wilderness_Area_1",
+    "Wilderness_Area_2",
+    "Wilderness_Area_3",
+    "Wilderness_Area_4",
+    "Soil_Type_1",
+    "Soil_Type_2",
+    "Soil_Type_3",
+    "Soil_Type_4",
+    "Soil_Type_5",
+    "Soil_Type_6",
+    "Soil_Type_7",
+    "Soil_Type_8",
+    "Soil_Type_9",
+    "Soil_Type_10",
+    "Soil_Type_11",
+    "Soil_Type_12",
+    "Soil_Type_13",
+    "Soil_Type_14",
+    "Soil_Type_15",
+    "Soil_Type_16",
+    "Soil_Type_17",
+    "Soil_Type_18",
+    "Soil_Type_19",
+    "Soil_Type_20",
+    "Soil_Type_21",
+    "Soil_Type_22",
+    "Soil_Type_23",
+    "Soil_Type_24",
+    "Soil_Type_25",
+    "Soil_Type_26",
+    "Soil_Type_27",
+    "Soil_Type_28",
+    "Soil_Type_29",
+    "Soil_Type_30",
+    "Soil_Type_31",
+    "Soil_Type_32",
+    "Soil_Type_33",
+    "Soil_Type_34",
+    "Soil_Type_35",
+    "Soil_Type_36",
+    "Soil_Type_37",
+    "Soil_Type_38",
+    "Soil_Type_39",
+    "Soil_Type_40",
+    "__label__"
+  ],
+  "edges": [
+    [
+      "Aspect",
+      "Hillshade_3pm"
+    ],
+    [
+      "Aspect",
+      "Hillshade_9am"
+    ],
+    [
+      "Aspect",
+      "Hillshade_Noon"
+    ],
+    [
+      "Aspect",
+      "Soil_Type_24"
+    ],
+    [
+      "Elevation",
+      "Horizontal_Distance_To_Fire_Points"
+    ],
+    [
+      "Elevation",
+      "Horizontal_Distance_To_Roadways"
+    ],
+    [
+      "Elevation",
+      "Soil_Type_10"
+    ],
+    [
+      "Elevation",
+      "Soil_Type_11"
+    ],
+    [
+      "Elevation",
+      "Soil_Type_12"
+    ],
+    [
+      "Elevation",
+      "Soil_Type_17"
+    ],
+    [
+      "Elevation",
+      "Soil_Type_22"
+    ],
+    [
+      "Elevation",
+      "Soil_Type_32"
+    ],
+    [
+      "Elevation",
+      "Soil_Type_35"
+    ],
+    [
+      "Elevation",
+      "Soil_Type_38"
+    ],
+    [
+      "Elevation",
+      "Soil_Type_39"
+    ],
+    [
+      "Elevation",
+      "Soil_Type_40"
+    ],
+    [
+      "Elevation",
+      "Wilderness_Area_2"
+    ],
+    [
+      "Hillshade_3pm",
+      "Hillshade_9am"
+    ],
+    [
+      "Horizontal_Distance_To_Fire_Points",
+      "Soil_Type_18"
+    ],
+    [
+      "Horizontal_Distance_To_Hydrology",
+      "Soil_Type_16"
+    ],
+    [
+      "Horizontal_Distance_To_Hydrology",
+      "Soil_Type_20"
+    ],
+    [
+      "Horizontal_Distance_To_Roadways",
+      "Aspect"
+    ],
+    [
+      "Horizontal_Distance_To_Roadways",
+      "Horizontal_Distance_To_Fire_Points"
+    ],
+    [
+      "Slope",
+      "Hillshade_3pm"
+    ],
+    [
+      "Slope",
+      "Hillshade_9am"
+    ],
+    [
+      "Slope",
+      "Hillshade_Noon"
+    ],
+    [
+      "Slope",
+      "Horizontal_Distance_To_Hydrology"
+    ],
+    [
+      "Slope",
+      "Soil_Type_13"
+    ],
+    [
+      "Slope",
+      "Soil_Type_19"
+    ],
+    [
+      "Slope",
+      "Soil_Type_33"
+    ],
+    [
+      "Soil_Type_10",
+      "Aspect"
+    ],
+    [
+      "Soil_Type_10",
+      "Slope"
+    ],
+    [
+      "Soil_Type_10",
+      "Soil_Type_1"
+    ],
+    [
+      "Soil_Type_10",
+      "Soil_Type_2"
+    ],
+    [
+      "Soil_Type_10",
+      "Soil_Type_5"
+    ],
+    [
+      "Soil_Type_10",
+      "Soil_Type_6"
+    ],
+    [
+      "Soil_Type_12",
+      "Slope"
+    ],
+    [
+      "Soil_Type_12",
+      "Soil_Type_29"
+    ],
+    [
+      "Soil_Type_12",
+      "Soil_Type_30"
+    ],
+    [
+      "Soil_Type_22",
+      "Soil_Type_23"
+    ],
+    [
+      "Soil_Type_23",
+      "Vertical_Distance_To_Hydrology"
+    ],
+    [
+      "Soil_Type_29",
+      "Soil_Type_20"
+    ],
+    [
+      "Soil_Type_29",
+      "Soil_Type_22"
+    ],
+    [
+      "Soil_Type_29",
+      "Soil_Type_23"
+    ],
+    [
+      "Soil_Type_29",
+      "Soil_Type_9"
+    ],
+    [
+      "Soil_Type_3",
+      "Soil_Type_6"
+    ],
+    [
+      "Soil_Type_30",
+      "Soil_Type_29"
+    ],
+    [
+      "Soil_Type_32",
+      "Soil_Type_24"
+    ],
+    [
+      "Soil_Type_32",
+      "Soil_Type_31"
+    ],
+    [
+      "Soil_Type_32",
+      "Soil_Type_38"
+    ],
+    [
+      "Soil_Type_32",
+      "Soil_Type_39"
+    ],
+    [
+      "Soil_Type_33",
+      "Soil_Type_13"
+    ],
+    [
+      "Soil_Type_33",
+      "Soil_Type_31"
+    ],
+    [
+      "Soil_Type_33",
+      "Soil_Type_32"
+    ],
+    [
+      "Soil_Type_4",
+      "Soil_Type_10"
+    ],
+    [
+      "Soil_Type_4",
+      "Wilderness_Area_3"
+    ],
+    [
+      "Soil_Type_4",
+      "__label__"
+    ],
+    [
+      "Soil_Type_40",
+      "Vertical_Distance_To_Hydrology"
+    ],
+    [
+      "Soil_Type_6",
+      "Soil_Type_1"
+    ],
+    [
+      "Vertical_Distance_To_Hydrology",
+      "Horizontal_Distance_To_Hydrology"
+    ],
+    [
+      "Vertical_Distance_To_Hydrology",
+      "Slope"
+    ],
+    [
+      "Wilderness_Area_1",
+      "Aspect"
+    ],
+    [
+      "Wilderness_Area_1",
+      "Horizontal_Distance_To_Fire_Points"
+    ],
+    [
+      "Wilderness_Area_1",
+      "Horizontal_Distance_To_Roadways"
+    ],
+    [
+      "Wilderness_Area_1",
+      "Soil_Type_10"
+    ],
+    [
+      "Wilderness_Area_1",
+      "Soil_Type_12"
+    ],
+    [
+      "Wilderness_Area_1",
+      "Soil_Type_17"
+    ],
+    [
+      "Wilderness_Area_1",
+      "Soil_Type_20"
+    ],
+    [
+      "Wilderness_Area_1",
+      "Soil_Type_29"
+    ],
+    [
+      "Wilderness_Area_1",
+      "Soil_Type_30"
+    ],
+    [
+      "Wilderness_Area_1",
+      "Soil_Type_32"
+    ],
+    [
+      "Wilderness_Area_1",
+      "Soil_Type_33"
+    ],
+    [
+      "Wilderness_Area_1",
+      "Soil_Type_9"
+    ],
+    [
+      "Wilderness_Area_1",
+      "Vertical_Distance_To_Hydrology"
+    ],
+    [
+      "Wilderness_Area_2",
+      "Soil_Type_25"
+    ],
+    [
+      "Wilderness_Area_2",
+      "Wilderness_Area_1"
+    ],
+    [
+      "Wilderness_Area_3",
+      "Horizontal_Distance_To_Roadways"
+    ],
+    [
+      "Wilderness_Area_3",
+      "Soil_Type_11"
+    ],
+    [
+      "Wilderness_Area_3",
+      "Soil_Type_13"
+    ],
+    [
+      "Wilderness_Area_3",
+      "Soil_Type_21"
+    ],
+    [
+      "Wilderness_Area_3",
+      "Soil_Type_22"
+    ],
+    [
+      "Wilderness_Area_3",
+      "Soil_Type_24"
+    ],
+    [
+      "Wilderness_Area_3",
+      "Soil_Type_26"
+    ],
+    [
+      "Wilderness_Area_3",
+      "Soil_Type_27"
+    ],
+    [
+      "Wilderness_Area_3",
+      "Soil_Type_28"
+    ],
+    [
+      "Wilderness_Area_3",
+      "Soil_Type_31"
+    ],
+    [
+      "Wilderness_Area_3",
+      "Soil_Type_34"
+    ],
+    [
+      "Wilderness_Area_3",
+      "Soil_Type_40"
+    ],
+    [
+      "Wilderness_Area_3",
+      "Wilderness_Area_1"
+    ],
+    [
+      "Wilderness_Area_3",
+      "Wilderness_Area_2"
+    ],
+    [
+      "Wilderness_Area_3",
+      "Wilderness_Area_4"
+    ],
+    [
+      "Wilderness_Area_4",
+      "Soil_Type_1"
+    ],
+    [
+      "Wilderness_Area_4",
+      "Soil_Type_14"
+    ],
+    [
+      "Wilderness_Area_4",
+      "Soil_Type_33"
+    ],
+    [
+      "Wilderness_Area_4",
+      "Soil_Type_5"
+    ],
+    [
+      "Wilderness_Area_4",
+      "Soil_Type_6"
+    ],
+    [
+      "Wilderness_Area_4",
+      "Wilderness_Area_1"
+    ],
+    [
+      "__label__",
+      "Elevation"
+    ],
+    [
+      "__label__",
+      "Soil_Type_2"
+    ],
+    [
+      "__label__",
+      "Soil_Type_23"
+    ],
+    [
+      "__label__",
+      "Soil_Type_3"
+    ],
+    [
+      "__label__",
+      "Wilderness_Area_3"
+    ],
+    [
+      "__label__",
+      "Wilderness_Area_4"
+    ]
+  ],
+  "feature_sets": {
+    "all_features": [
+      "Elevation",
+      "Aspect",
+      "Slope",
+      "Horizontal_Distance_To_Hydrology",
+      "Vertical_Distance_To_Hydrology",
+      "Horizontal_Distance_To_Roadways",
+      "Hillshade_9am",
+      "Hillshade_Noon",
+      "Hillshade_3pm",
+      "Horizontal_Distance_To_Fire_Points",
+      "Wilderness_Area_1",
+      "Wilderness_Area_2",
+      "Wilderness_Area_3",
+      "Wilderness_Area_4",
+      "Soil_Type_1",
+      "Soil_Type_2",
+      "Soil_Type_3",
+      "Soil_Type_4",
+      "Soil_Type_5",
+      "Soil_Type_6",
+      "Soil_Type_7",
+      "Soil_Type_8",
+      "Soil_Type_9",
+      "Soil_Type_10",
+      "Soil_Type_11",
+      "Soil_Type_12",
+      "Soil_Type_13",
+      "Soil_Type_14",
+      "Soil_Type_15",
+      "Soil_Type_16",
+      "Soil_Type_17",
+      "Soil_Type_18",
+      "Soil_Type_19",
+      "Soil_Type_20",
+      "Soil_Type_21",
+      "Soil_Type_22",
+      "Soil_Type_23",
+      "Soil_Type_24",
+      "Soil_Type_25",
+      "Soil_Type_26",
+      "Soil_Type_27",
+      "Soil_Type_28",
+      "Soil_Type_29",
+      "Soil_Type_30",
+      "Soil_Type_31",
+      "Soil_Type_32",
+      "Soil_Type_33",
+      "Soil_Type_34",
+      "Soil_Type_35",
+      "Soil_Type_36",
+      "Soil_Type_37",
+      "Soil_Type_38",
+      "Soil_Type_39",
+      "Soil_Type_40"
+    ],
+    "label_parents": [
+      "Soil_Type_4"
+    ],
+    "markov_blanket": [
+      "Elevation",
+      "Wilderness_Area_3",
+      "Wilderness_Area_4",
+      "Soil_Type_2",
+      "Soil_Type_3",
+      "Soil_Type_4",
+      "Soil_Type_10",
+      "Soil_Type_22",
+      "Soil_Type_23",
+      "Soil_Type_29"
+    ]
+  },
+  "mode": "fresh",
+  "method": "discrete BIC hill climb",
+  "bins": 5,
+  "max_indegree": 3,
+  "max_iter": 10000,
+  "data_sha256": "958585a2257d03dc85a195897699545c4ee95f59fde8de6e80df799636593c9c",
+  "discretization": {
+    "Elevation": {
+      "edges": [
+        1893.0,
+        2753.0,
+        2937.0,
+        3059.0,
+        3197.0,
+        3746.0
+      ]
+    },
+    "Aspect": {
+      "edges": [
+        0.0,
+        46.0,
+        97.0,
+        170.0,
+        288.0,
+        360.0
+      ]
+    },
+    "Slope": {
+      "edges": [
+        0.0,
+        8.0,
+        11.0,
+        15.0,
+        20.0,
+        62.0
+      ]
+    },
+    "Horizontal_Distance_To_Hydrology": {
+      "edges": [
+        0.0,
+        85.0,
+        175.0,
+        277.0,
+        430.0,
+        1239.0
+      ]
+    },
+    "Vertical_Distance_To_Hydrology": {
+      "edges": [
+        -152.0,
+        4.0,
+        19.0,
+        42.0,
+        80.0,
+        597.0
+      ]
+    },
+    "Horizontal_Distance_To_Roadways": {
+      "edges": [
+        0.0,
+        940.0,
+        1600.0,
+        2448.4000000000005,
+        3717.2000000000007,
+        7078.0
+      ]
+    },
+    "Hillshade_9am": {
+      "edges": [
+        0.0,
+        193.0,
+        211.0,
+        223.0,
+        234.0,
+        254.0
+      ]
+    },
+    "Hillshade_Noon": {
+      "edges": [
+        0.0,
+        209.0,
+        221.0,
+        230.0,
+        240.0,
+        254.0
+      ]
+    },
+    "Hillshade_3pm": {
+      "edges": [
+        0.0,
+        113.0,
+        134.0,
+        152.0,
+        175.0,
+        249.0
+      ]
+    },
+    "Horizontal_Distance_To_Fire_Points": {
+      "edges": [
+        0.0,
+        890.0,
+        1421.6000000000004,
+        2023.0,
+        2755.0,
+        6934.0
+      ]
+    },
+    "Wilderness_Area_1": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Wilderness_Area_2": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Wilderness_Area_3": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Wilderness_Area_4": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_1": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_2": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_3": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_4": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_5": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_6": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_7": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_8": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_9": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_10": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_11": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_12": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_13": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_14": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_15": {
+      "states": [
+        "0"
+      ]
+    },
+    "Soil_Type_16": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_17": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_18": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_19": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_20": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_21": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_22": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_23": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_24": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_25": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_26": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_27": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_28": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_29": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_30": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_31": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_32": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_33": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_34": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_35": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_36": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_37": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_38": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_39": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "Soil_Type_40": {
+      "states": [
+        "0",
+        "1"
+      ]
+    },
+    "__label__": {
+      "states": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    }
+  },
+  "pythonhashseed": "0",
+  "input_representation": "original unscaled 54 UCI columns",
+  "training_rows": 10000,
+  "model_preprocessing_applied": false,
+  "note": "Observational candidate DAG; edge directions are not established causal mechanisms."
+}

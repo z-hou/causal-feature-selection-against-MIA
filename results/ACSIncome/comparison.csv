@@ -1,0 +1,4 @@
+dataset,experiment,feature_count,retained_features,target_train_accuracy,target_test_accuracy,rmia_auc,rmia_best_accuracy,tpr_at_1pct_fpr,tpr_at_0_1pct_fpr,rmia_a,gamma,reference_count,seed,epochs,distribution
+ACSIncome,all_features,10,"[""AGEP"", ""COW"", ""SCHL"", ""MAR"", ""OCCP"", ""POBP"", ""RELP"", ""WKHP"", ""SEX"", ""RAC1P""]",0.9991,0.7644,0.6925224199999999,0.6338,0.0604,0.0155,0.0,2.0,8,42,100,same_state_year
+ACSIncome,label_parents,1,"[""SCHL""]",0.7044,0.705,0.500013525,0.50335,0.0129,0.0021,0.0,2.0,8,42,100,same_state_year
+ACSIncome,markov_blanket,6,"[""AGEP"", ""SCHL"", ""MAR"", ""RELP"", ""WKHP"", ""RAC1P""]",0.868,0.7515,0.59412558,0.5644,0.0285,0.0059,0.0,2.0,8,42,100,same_state_year

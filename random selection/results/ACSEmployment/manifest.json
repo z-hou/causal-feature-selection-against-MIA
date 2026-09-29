@@ -1,0 +1,118 @@
+{
+  "dataset": "ACSEmployment",
+  "selection_seed": 42,
+  "all_features": [
+    "AGEP",
+    "SCHL",
+    "MAR",
+    "RELP",
+    "DIS",
+    "ESP",
+    "CIT",
+    "MIG",
+    "MIL",
+    "ANC",
+    "NATIVITY",
+    "DEAR",
+    "DEYE",
+    "DREM",
+    "SEX",
+    "RAC1P"
+  ],
+  "markov_blanket": [
+    "AGEP",
+    "DIS",
+    "MIL",
+    "NATIVITY"
+  ],
+  "remaining_features": [
+    "SCHL",
+    "MAR",
+    "RELP",
+    "ESP",
+    "CIT",
+    "MIG",
+    "ANC",
+    "DEAR",
+    "DEYE",
+    "DREM",
+    "SEX",
+    "RAC1P"
+  ],
+  "selected_features": [
+    "SCHL",
+    "MIG",
+    "ANC",
+    "NATIVITY"
+  ],
+  "selection_pool": [
+    "AGEP",
+    "SCHL",
+    "MAR",
+    "RELP",
+    "DIS",
+    "ESP",
+    "CIT",
+    "MIG",
+    "MIL",
+    "ANC",
+    "NATIVITY",
+    "DEAR",
+    "DEYE",
+    "DREM",
+    "SEX",
+    "RAC1P"
+  ],
+  "markov_blanket_overlap": [
+    "NATIVITY"
+  ],
+  "attack_mode": "non_adaptive",
+  "source_root": ".",
+  "graph_sha256": "253b5a15599dbaf27cb770aa1382ce117ac6148c9b1762bab4f5fe0b6f2d3f7e",
+  "baseline_csv_sha256": "db643868f2c7c6b00dfa014a87ed3fc3e9dc2a49e487cd01893eb1f793e6d86c",
+  "versions": {
+    "numpy": "1.26.4",
+    "pandas": "2.0.3",
+    "torch": "2.2.2",
+    "pgmpy": "0.1.25",
+    "folktables": "0.0.12"
+  },
+  "data_sha256": "2c4d4c8ce69613c33a46c3ae8386dc9bef431c38529560e88664202fed403631",
+  "reference_sha256": {
+    "ref0.pt": "2fa650fadfa887f75001d0487ea494d2dd5b55571b2a8f10020cc58705c3fb5e",
+    "ref1.pt": "d8ca35393d7af39758c65439ab2ea530f13444a349843a70fd3efa68ede8a64c",
+    "ref2.pt": "15f37902c914aeafe48ebfb31ec7fa3ee0a532667c90bbb6898b94f4980de068",
+    "ref3.pt": "5c1a2c0b761ec53fe9201498d2bdb2d2a8226a942cecb9d918347c7d94377bc0",
+    "ref4.pt": "31fd9c152c4862c64931a40425bdcb43883894a94dca5ac26cb9d3f1a7ac508e",
+    "ref5.pt": "4713b6e90fca5bbf7563fb18c2d3329750b431022b4a1bcfeeb25639cd593942",
+    "ref6.pt": "957f476068b719c1a957dd1dd4097ef24ef6709d1637305aacab530389f7fd75",
+    "ref7.pt": "ec5c21c7e661c5a46981c0a9210935fcfc25e30c49f7cddb966240d03162969b"
+  },
+  "target_sha256": "eba4e650bfa29ffaa05da539a4327e835bfa3fffcde7ef4a78d657ae8b35e973",
+  "training": {
+    "dataset": "ACSEmployment",
+    "epochs": 100,
+    "batch_size": 256,
+    "threads": 2,
+    "device": "cpu",
+    "seed": 42,
+    "data_sha256": "2c4d4c8ce69613c33a46c3ae8386dc9bef431c38529560e88664202fed403631",
+    "graph_sha256": "253b5a15599dbaf27cb770aa1382ce117ac6148c9b1762bab4f5fe0b6f2d3f7e",
+    "versions": {
+      "numpy": "1.26.4",
+      "pandas": "2.0.3",
+      "torch": "2.2.2",
+      "pgmpy": "0.1.25",
+      "folktables": "0.0.12"
+    },
+    "historical": true,
+    "selection_seed": 42,
+    "attack_mode": "non_adaptive"
+  },
+  "baseline_mb_reproduced": true,
+  "rmia_a": 0.1,
+  "gamma": 2.0,
+  "status": "completed",
+  "reason": "",
+  "elapsed_seconds": 25.965039253234863
+}

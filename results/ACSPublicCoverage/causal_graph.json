@@ -1,0 +1,359 @@
+{
+  "nodes": [
+    "AGEP",
+    "SCHL",
+    "MAR",
+    "SEX",
+    "DIS",
+    "ESP",
+    "CIT",
+    "MIG",
+    "MIL",
+    "ANC",
+    "NATIVITY",
+    "DEAR",
+    "DEYE",
+    "DREM",
+    "PINCP",
+    "ESR",
+    "ST",
+    "FER",
+    "RAC1P",
+    "__label__"
+  ],
+  "edges": [
+    [
+      "AGEP",
+      "CIT"
+    ],
+    [
+      "AGEP",
+      "ESR"
+    ],
+    [
+      "AGEP",
+      "FER"
+    ],
+    [
+      "AGEP",
+      "MIG"
+    ],
+    [
+      "AGEP",
+      "SEX"
+    ],
+    [
+      "CIT",
+      "NATIVITY"
+    ],
+    [
+      "CIT",
+      "RAC1P"
+    ],
+    [
+      "DEAR",
+      "DEYE"
+    ],
+    [
+      "DIS",
+      "CIT"
+    ],
+    [
+      "DIS",
+      "DEAR"
+    ],
+    [
+      "DIS",
+      "DEYE"
+    ],
+    [
+      "DIS",
+      "DREM"
+    ],
+    [
+      "DIS",
+      "__label__"
+    ],
+    [
+      "DREM",
+      "DEYE"
+    ],
+    [
+      "ESR",
+      "DIS"
+    ],
+    [
+      "ESR",
+      "MIL"
+    ],
+    [
+      "ESR",
+      "PINCP"
+    ],
+    [
+      "ESR",
+      "__label__"
+    ],
+    [
+      "FER",
+      "DIS"
+    ],
+    [
+      "FER",
+      "SEX"
+    ],
+    [
+      "MAR",
+      "AGEP"
+    ],
+    [
+      "MIL",
+      "ESP"
+    ],
+    [
+      "NATIVITY",
+      "ANC"
+    ],
+    [
+      "NATIVITY",
+      "DREM"
+    ],
+    [
+      "NATIVITY",
+      "MIG"
+    ],
+    [
+      "NATIVITY",
+      "SCHL"
+    ],
+    [
+      "RAC1P",
+      "ANC"
+    ],
+    [
+      "__label__",
+      "PINCP"
+    ]
+  ],
+  "mode": "fresh",
+  "method": "discrete BIC hill climb",
+  "bins": 5,
+  "max_indegree": 3,
+  "max_iter": 10000,
+  "pythonhashseed": "0",
+  "note": "Observational candidate DAG; edge directions are not established causal mechanisms.",
+  "feature_sets": {
+    "all_features": [
+      "AGEP",
+      "SCHL",
+      "MAR",
+      "SEX",
+      "DIS",
+      "ESP",
+      "CIT",
+      "MIG",
+      "MIL",
+      "ANC",
+      "NATIVITY",
+      "DEAR",
+      "DEYE",
+      "DREM",
+      "PINCP",
+      "ESR",
+      "ST",
+      "FER",
+      "RAC1P"
+    ],
+    "label_parents": [
+      "DIS",
+      "ESR"
+    ],
+    "markov_blanket": [
+      "DIS",
+      "PINCP",
+      "ESR"
+    ]
+  },
+  "data_sha256": "52f9841cae2069eebc09356f8aeb42bc60d026fe999d25706b5651883904d9bc",
+  "discretization": {
+    "AGEP": {
+      "edges": [
+        15.0,
+        22.0,
+        30.0,
+        42.0,
+        54.0,
+        64.0
+      ]
+    },
+    "SCHL": {
+      "states": [
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0,
+        8.0,
+        9.0,
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0,
+        16.0,
+        17.0,
+        18.0,
+        19.0,
+        20.0,
+        21.0,
+        22.0,
+        23.0,
+        24.0
+      ]
+    },
+    "MAR": {
+      "states": [
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0
+      ]
+    },
+    "SEX": {
+      "states": [
+        1.0,
+        2.0
+      ]
+    },
+    "DIS": {
+      "states": [
+        1.0,
+        2.0
+      ]
+    },
+    "ESP": {
+      "states": [
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0,
+        8.0
+      ]
+    },
+    "CIT": {
+      "states": [
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0
+      ]
+    },
+    "MIG": {
+      "states": [
+        1.0,
+        2.0,
+        3.0
+      ]
+    },
+    "MIL": {
+      "states": [
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0
+      ]
+    },
+    "ANC": {
+      "states": [
+        1.0,
+        2.0,
+        3.0,
+        4.0
+      ]
+    },
+    "NATIVITY": {
+      "states": [
+        1.0,
+        2.0
+      ]
+    },
+    "DEAR": {
+      "states": [
+        1.0,
+        2.0
+      ]
+    },
+    "DEYE": {
+      "states": [
+        1.0,
+        2.0
+      ]
+    },
+    "DREM": {
+      "states": [
+        1.0,
+        2.0
+      ]
+    },
+    "PINCP": {
+      "edges": [
+        -7100.0,
+        0.0,
+        6000.0,
+        13600.0,
+        21600.0,
+        30000.0
+      ]
+    },
+    "ESR": {
+      "states": [
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        6.0
+      ]
+    },
+    "ST": {
+      "states": [
+        6.0
+      ]
+    },
+    "FER": {
+      "states": [
+        0.0,
+        1.0,
+        2.0
+      ]
+    },
+    "RAC1P": {
+      "states": [
+        1.0,
+        2.0,
+        3.0,
+        5.0,
+        6.0,
+        7.0,
+        8.0,
+        9.0
+      ]
+    },
+    "__label__": {
+      "states": [
+        0,
+        1
+      ]
+    }
+  }
+}

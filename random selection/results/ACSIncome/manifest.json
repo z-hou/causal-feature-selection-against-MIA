@@ -1,0 +1,105 @@
+{
+  "dataset": "ACSIncome",
+  "selection_seed": 42,
+  "all_features": [
+    "AGEP",
+    "COW",
+    "SCHL",
+    "MAR",
+    "OCCP",
+    "POBP",
+    "RELP",
+    "WKHP",
+    "SEX",
+    "RAC1P"
+  ],
+  "markov_blanket": [
+    "AGEP",
+    "SCHL",
+    "MAR",
+    "RELP",
+    "WKHP",
+    "RAC1P"
+  ],
+  "remaining_features": [
+    "COW",
+    "OCCP",
+    "POBP",
+    "SEX"
+  ],
+  "selected_features": [
+    "AGEP",
+    "MAR",
+    "OCCP",
+    "RELP",
+    "SEX",
+    "RAC1P"
+  ],
+  "selection_pool": [
+    "AGEP",
+    "COW",
+    "SCHL",
+    "MAR",
+    "OCCP",
+    "POBP",
+    "RELP",
+    "WKHP",
+    "SEX",
+    "RAC1P"
+  ],
+  "markov_blanket_overlap": [
+    "AGEP",
+    "MAR",
+    "RAC1P",
+    "RELP"
+  ],
+  "attack_mode": "non_adaptive",
+  "source_root": ".",
+  "graph_sha256": "a455e28df8566061a8b3c2f9a3b98ffb64d85aec3b9a73c12cdab29e99850603",
+  "baseline_csv_sha256": "077afa5420202ce221ebe7bc9c8300d22f82393dffc5fc900d4aebcecea39782",
+  "versions": {
+    "numpy": "1.26.4",
+    "pandas": "2.0.3",
+    "torch": "2.2.2",
+    "pgmpy": "0.1.25",
+    "folktables": "0.0.12"
+  },
+  "data_sha256": "48e1abd7e22584292773dc3a82ac1100c87d96132cb65e881c590dbd42c050fe",
+  "reference_sha256": {
+    "ref0.pt": "6aaca8e1cfbc361494f42e01e75cf8d6b7ec682ac33b07837d84433dfccc7119",
+    "ref1.pt": "67df8159e1d8074d21ea5e9c8e304bc90c254ef5e1ac3747c094dcf640ccacc9",
+    "ref2.pt": "175458adcaa28adbab67a111fa526ca8bdc9b25c0f308701b3544035f9f7bb92",
+    "ref3.pt": "6cb2b134530b83beeb685237f887b597db0f99b2c9a03fe6cacdeb6b22b5ed5f",
+    "ref4.pt": "253df66ccf92d6df7ef77701dc2c28caaea6d2d41cf2fd89d51dc72642338bc5",
+    "ref5.pt": "0e6a860371f50a12c8703d7a8eaed3532af352a47a307796ec8fe3187aa523d1",
+    "ref6.pt": "d8d39f6a080b307668b81b6d1578c6fb15f014026abf0bbc8477d95b6e552f45",
+    "ref7.pt": "ed5b05f5791fab8047bdec537e63b16a44b27cf50718d823992be719f0302ea4"
+  },
+  "target_sha256": "061709269637cc48ddad77ca1d5e0a86284aed8bd4385fc3b0fccaaf205ff092",
+  "training": {
+    "dataset": "ACSIncome",
+    "threads": 2,
+    "device": "cpu",
+    "data_sha256": "48e1abd7e22584292773dc3a82ac1100c87d96132cb65e881c590dbd42c050fe",
+    "graph_sha256": "a455e28df8566061a8b3c2f9a3b98ffb64d85aec3b9a73c12cdab29e99850603",
+    "versions": {
+      "numpy": "1.26.4",
+      "pandas": "2.0.3",
+      "torch": "2.2.2",
+      "pgmpy": "0.1.25",
+      "folktables": "0.0.12"
+    },
+    "historical": false,
+    "epochs": 100,
+    "batch_size": 256,
+    "seed": 42,
+    "selection_seed": 42,
+    "attack_mode": "non_adaptive"
+  },
+  "baseline_mb_reproduced": true,
+  "rmia_a": 0.0,
+  "gamma": 2.0,
+  "status": "completed",
+  "reason": "",
+  "elapsed_seconds": 42.378300189971924
+}
