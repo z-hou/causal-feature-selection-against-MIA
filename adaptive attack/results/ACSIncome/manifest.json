@@ -40,7 +40,7 @@
   },
   "data_sha256": "48e1abd7e22584292773dc3a82ac1100c87d96132cb65e881c590dbd42c050fe",
   "graph_sha256": "a455e28df8566061a8b3c2f9a3b98ffb64d85aec3b9a73c12cdab29e99850603",
-  "baseline_csv_sha256": "077afa5420202ce221ebe7bc9c8300d22f82393dffc5fc900d4aebcecea39782",
+  "baseline_csv_sha256": "2c434fb2f6e5705cab5055414e45970d180568033ade3fc3d725469075041ff5",
   "source": ".",
   "versions": {
     "numpy": "1.26.4",

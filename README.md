@@ -1,263 +1,257 @@
-# Causal Feature Selection and Membership Inference
+# Reproducing the Experiments
 
-This project compares all input features, the target's parents, and its Markov
-blanket using MLP prediction models and membership inference attacks. Additional
-experiments evaluate random feature selection and adaptive RMIA references.
+Use the supplied data and run these three stages:
 
-## 1. Environment
+1. Learn the causal graph and extract the target's parents and Markov blanket.
+2. Train the target models and reference models.
+3. Run RMIA, compute the metrics, and save the results as CSV files.
 
-Run all commands from the project root in Bash. Use Python 3.11 and the pinned
-package versions used by the saved checkpoints:
+This workflow uses the existing data splits. No data downloading, generation, or
+splitting is required. Steps 1–3 reproduce the main experiment. Steps 4–6 run
+adaptive RMIA, the loss attack, and random feature selection using those outputs.
 
-```bash
-python3.11 -m venv .venv
-source .venv/bin/activate
+## Preparation
+
+Use Python 3.11 and run commands from the project directory containing the Python
+scripts. Install the dependencies:
+
+```text
 python -m pip install -r requirements.txt
-export PYTHONHASHSEED=0
-export PYTHONDONTWRITEBYTECODE=1
 ```
 
-The experiments use CPU execution with two PyTorch threads. Matching package
-versions, hardware, and numerical libraries is important for close numerical
-agreement; retraining on another platform is not guaranteed to produce identical
-weights. The random-selection evaluation also checks the recorded package versions.
+Before starting Python, set `PYTHONHASHSEED=0` in your IDE's run configuration or
+the environment settings used by your terminal. This fixes Python hash ordering
+for graph discovery. Setting it inside an already running Python session is not
+sufficient. The `-B` option in the commands below prevents bytecode cache creation.
 
-## 2. Saved experiment configuration
+Using your file manager:
 
-The seven datasets are `ACSEmployment`, `ACSPublicCoverage`, `ACSMobility`,
-`ACSIncome`, `ACSTravelTime`, `half-a-million-lifestyle`, and `covertype`.
+1. Create a new directory named `reproduction/main/` inside the project.
+2. Copy the supplied `data/` folder into it as `reproduction/main/data/`.
+3. Leave `reproduction/main/models/` and `reproduction/main/results/` absent.
+   The scripts will create them. Do not copy existing models, graphs, or CSVs.
 
-- Target training/test sets: 10,000 records each.
-- Reference pool: 20,000 records; each of eight references uses 10,000 for training
-  and 10,000 for testing. Each record belongs to four reference training sets.
-- Additional calibration set: 5,000 records.
-- MLP hidden layers: 512, 256, 128; 100 epochs; batch size 256.
-- Data and target seed: 42; reference seeds: 43 through 50.
-- Baseline RMIA: the same eight full-feature references for all three targets.
-- Adaptive RMIA: references use the feature subset of the corresponding target.
-- Random selection: sample from all original features without replacement, using
-  seed 42 and the same feature count as the Markov blanket; references remain
-  full-feature models.
-- Reported attack metrics: AUC, TPR at 1% FPR, and TPR at 0.1% FPR.
+The input layout should be:
 
-ACS datasets use California 2018 records. ACSEmployment uses a saved historical
-split and graph. The other saved graphs use discrete BIC hill climbing with five
-quantile bins, maximum indegree 3, maximum iterations 10,000, and
-`PYTHONHASHSEED=0`. Graph discovery uses target training records only.
-
-## 3. Verify the supplied artifacts
-
-These commands check the existing artifacts without training or rewriting results:
-
-```bash
-python 'random selection/verify.py'
-python 'adaptive attack/verify.py'
+```text
+reproduction/main/data/
+    ACSEmployment/data.npz
+    ACSPublicCoverage/data.npz
+    ACSMobility/data.npz
+    ACSIncome/data.npz
+    ACSTravelTime/data.npz
+    half-a-million-lifestyle/data.npz
+    covertype/data.npz
 ```
 
-Expected summaries:
+Copying these archives preserves all existing training, test, calibration, and
+reference-membership splits. Keep the terminal in the project directory for all
+commands below. Wait for each command to finish successfully before continuing.
 
-- Random selection: seven datasets, 56 reference files, and 28 result rows.
-- Adaptive attack: 168 reference files and 21 result rows.
+## 1. Learn the causal graphs
 
-The random-selection verifier recomputes attack metrics from saved attack scores.
-The adaptive verifier checks model/data/graph consistency and saved result
-relationships. To recompute predictions and attacks, continue with Section 4.
+Run graph discovery on the target training data. Each graph contains the original
+input features and the target label. The code uses discrete BIC hill climbing,
+five quantile bins, maximum indegree 3, and up to 10,000 search iterations.
 
-Optional code tests require pytest, which is not included in `requirements.txt`:
-
-```bash
-python -m pip install pytest
-python -m pytest -q -p no:cacheprovider test_pipeline.py 'adaptive attack/test_adaptive.py'
+```text
+python -B Learn_causal_graph.py --dataset ACSEmployment --root reproduction/main --bins 5 --max-indegree 3 --max-iter 10000
+python -B Learn_causal_graph.py --dataset ACSPublicCoverage --root reproduction/main --bins 5 --max-indegree 3 --max-iter 10000
+python -B Learn_causal_graph.py --dataset ACSMobility --root reproduction/main --bins 5 --max-indegree 3 --max-iter 10000
+python -B Learn_causal_graph.py --dataset ACSIncome --root reproduction/main --bins 5 --max-indegree 3 --max-iter 10000
+python -B Learn_causal_graph.py --dataset ACSTravelTime --root reproduction/main --bins 5 --max-indegree 3 --max-iter 10000
+python -B Learn_causal_graph.py --dataset half-a-million-lifestyle --root reproduction/main --bins 5 --max-indegree 3 --max-iter 10000
+python -B Learn_causal_graph.py --dataset covertype --root reproduction/main --bins 5 --max-indegree 3 --max-iter 10000
 ```
 
-## 4. Recompute results from saved models
+For each dataset, outputs are saved under `reproduction/main/results/<dataset>/`:
 
-No downloads or model training are needed. Work on copies so the supplied results
-remain available for comparison. The following setup requires a new
-`reproduction/evaluation` directory and enough disk space for the model copies:
+- `causal_graph.json`: graph edges, selected feature sets, and metadata.
+- `causal_graph.png`: visualization of the learned graph.
 
-```bash
-python - <<'PY'
-from pathlib import Path
-import shutil
+These commands learn new graphs from the supplied data, including ACSEmployment.
+Do not add `--historical`; this workflow does not import previous graphs.
 
-work = Path('reproduction/evaluation')
-work.mkdir(parents=True, exist_ok=False)
-for name in ['data', 'models', 'results']:
-    shutil.copytree(name, work / 'baseline' / name)
-for experiment in ['random selection', 'adaptive attack']:
-    for name in ['models', 'results']:
-        shutil.copytree(Path(experiment) / name, work / experiment / name)
-PY
+## 2. Train target and reference models
+
+Each command trains:
+
+- Three target models using all features, the target's parents, and its Markov blanket.
+- Eight reference models using all input features. The same references are used
+  for all three target strategies.
+
+The MLP has hidden layers `(512, 256, 128)`. Training uses 100 epochs, batch size
+256, two CPU threads, and the seeds recorded in the supplied data. For the supplied
+datasets, target seed is 42 and reference seeds are 43 through 50.
+
+```text
+python -B train.py --dataset ACSEmployment --root reproduction/main --epochs 100 --batch-size 256 --threads 2
+python -B train.py --dataset ACSPublicCoverage --root reproduction/main --epochs 100 --batch-size 256 --threads 2
+python -B train.py --dataset ACSMobility --root reproduction/main --epochs 100 --batch-size 256 --threads 2
+python -B train.py --dataset ACSIncome --root reproduction/main --epochs 100 --batch-size 256 --threads 2
+python -B train.py --dataset ACSTravelTime --root reproduction/main --epochs 100 --batch-size 256 --threads 2
+python -B train.py --dataset half-a-million-lifestyle --root reproduction/main --epochs 100 --batch-size 256 --threads 2
+python -B train.py --dataset covertype --root reproduction/main --epochs 100 --batch-size 256 --threads 2
 ```
 
-### 4.1 Baseline RMIA and loss attack
+Each dataset produces 11 checkpoints in `reproduction/main/models/<dataset>/`:
 
-```bash
-set -e
-datasets=(ACSEmployment ACSPublicCoverage ACSMobility ACSIncome ACSTravelTime half-a-million-lifestyle covertype)
-for dataset in "${datasets[@]}"; do
-    python RMIA.py --dataset "$dataset" --root reproduction/evaluation/baseline
-done
-python loss_attack.py --root reproduction/evaluation/baseline
+```text
+target_all_features.pt
+target_label_parents.pt
+target_markov_blanket.pt
+ref0.pt ... ref7.pt
 ```
 
-RMIA uses `gamma=2`. With no `--a` argument, it uses `a=0.1` for historical
-ACSEmployment and selects `a` using auxiliary calibration for the other datasets.
-The loss attack uses negative per-example cross-entropy and needs no references.
+Each checkpoint includes the model weights, fitted feature encoder, and training
+metadata. The target has 10,000 training and 10,000 test records. Each reference
+uses 10,000 training and 10,000 test records from its separate reference pool.
+All models are newly trained; no existing weights are imported.
 
-### 4.2 Random selection and adaptive RMIA
+## 3. Run RMIA and save CSV results
 
-Use the supplied baseline as the source and the copied experiment models as the
-outputs. `--evaluate-only` prevents training missing models:
+Run RMIA on the newly trained models. Keep `gamma=2` and omit `--a` so the code
+selects `a` using auxiliary calibration for the newly learned graphs.
 
-```bash
-python 'random selection/run.py' --source-root . \
-    --output 'reproduction/evaluation/random selection' --evaluate-only
-python 'adaptive attack/run.py' --source . \
-    --output 'reproduction/evaluation/adaptive attack' --evaluate-only
-python 'adaptive attack/verify.py' --source . \
-    --output 'reproduction/evaluation/adaptive attack'
+```text
+python -B RMIA.py --dataset ACSEmployment --root reproduction/main --gamma 2
+python -B RMIA.py --dataset ACSPublicCoverage --root reproduction/main --gamma 2
+python -B RMIA.py --dataset ACSMobility --root reproduction/main --gamma 2
+python -B RMIA.py --dataset ACSIncome --root reproduction/main --gamma 2
+python -B RMIA.py --dataset ACSTravelTime --root reproduction/main --gamma 2
+python -B RMIA.py --dataset half-a-million-lifestyle --root reproduction/main --gamma 2
+python -B RMIA.py --dataset covertype --root reproduction/main --gamma 2
 ```
 
-The random-selection verifier has no custom-output option; its Section 3 command
-checks the supplied artifacts. The evaluation command above checks model
-provenance and reproduces the baseline Markov-blanket metrics before computing the
-random-selection results.
+Each command prints the results and writes:
 
-### 4.3 Compare recomputed CSV results
-
-Run after all Section 4 evaluation commands complete:
-
-```bash
-python - <<'PY'
-from pathlib import Path
-import pandas as pd
-
-work = Path('reproduction/evaluation')
-pairs = [(Path('results'), work / 'baseline/results'),
-         (Path('random selection/results'), work / 'random selection/results'),
-         (Path('adaptive attack/results'), work / 'adaptive attack/results')]
-checked = 0
-for original, reproduced in pairs:
-    for path in sorted(original.rglob('*.csv')):
-        other = reproduced / path.relative_to(original)
-        expected = pd.read_csv(path)
-        actual = pd.read_csv(other)
-        # Compare results independently of file-serialization provenance.
-        hash_columns = [c for c in expected.columns if c.endswith('_sha256')]
-        expected = expected.drop(columns=hash_columns)
-        actual = actual.drop(columns=hash_columns)
-        keys = ['dataset', 'experiment']
-        expected = expected.sort_values(keys).reset_index(drop=True)
-        actual = actual.sort_values(keys).reset_index(drop=True)
-        pd.testing.assert_frame_equal(actual, expected, check_exact=False,
-                                      rtol=0, atol=1e-12)
-        checked += 1
-print(f'Compared {checked} CSV files successfully.')
-PY
+```text
+reproduction/main/results/<dataset>/comparison.csv
 ```
 
-This checks numeric agreement to an absolute tolerance of `1e-12`, along with
-non-hash column contents and identifiers. File-hash columns are excluded: the
-saved ACSEmployment loss-attack CSV retains hashes from before path anonymization,
-whereas a new evaluation records the current artifact hashes. This does not
-change the stored metrics. The evaluation scripts check current data/graph/model
-consistency independently. A metric mismatch should be investigated rather than
-silently replacing the supplied baseline.
+There are seven CSV files and 21 result rows in total. Each file contains three
+rows: `all_features`, `label_parents`, and `markov_blanket`.
 
-## 5. Retrain using the supplied splits and feature sets
-
-Use this route to repeat model training while keeping data splits and selected
-features fixed. It requires a new `reproduction/retrain` directory:
-
-```bash
-python - <<'PY'
-from pathlib import Path
-import shutil
-
-work = Path('reproduction/retrain')
-work.mkdir(parents=True, exist_ok=False)
-shutil.copytree('data', work / 'data')
-for graph in Path('results').glob('*/causal_graph.json'):
-    destination = work / graph
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(graph, destination)
-PY
-
-set -e
-datasets=(ACSEmployment ACSPublicCoverage ACSMobility ACSIncome ACSTravelTime half-a-million-lifestyle covertype)
-for dataset in "${datasets[@]}"; do
-    python train.py --dataset "$dataset" --root reproduction/retrain \
-        --epochs 100 --batch-size 256 --threads 2
-    python RMIA.py --dataset "$dataset" --root reproduction/retrain
-done
-python loss_attack.py --root reproduction/retrain
-python 'random selection/run.py' --source-root reproduction/retrain \
-    --output reproduction/retrain/random_selection --selection-seed 42
-python 'adaptive attack/run.py' --source reproduction/retrain \
-    --output reproduction/retrain/adaptive_attack
-python 'adaptive attack/verify.py' --source reproduction/retrain \
-    --output reproduction/retrain/adaptive_attack
-```
-
-`train.py` supports all seven datasets. `train_lifestyle.py` and
-`train_covertype.py` are optional dataset-specific entry points for the same
-training implementation. Training requires empty model output directories.
-These commands retrain all baseline models, including ACSEmployment; they do not
-import historical weights. Compare retrained metrics separately from the
-saved-model evaluation in Section 4.
-
-## 6. Optional: prepare data and learn a graph again
-
-For a fresh experiment, choose an unused root and a dataset. For example:
-
-```bash
-python data_prepare.py --dataset ACSPublicCoverage --root reproduction/fresh \
-    --year 2018 --state CA --seed 42
-python Learn_causal_graph.py --dataset ACSPublicCoverage --root reproduction/fresh \
-    --bins 5 --max-indegree 3 --max-iter 10000
-python train.py --dataset ACSPublicCoverage --root reproduction/fresh \
-    --epochs 100 --batch-size 256 --threads 2
-python RMIA.py --dataset ACSPublicCoverage --root reproduction/fresh
-python loss_attack.py --dataset ACSPublicCoverage --root reproduction/fresh
-```
-
-Data preparation downloads source data when needed. For local source files, use
-`--dataset half-a-million-lifestyle --csv path/to/user_data.csv` or
-`--dataset covertype --covtype-file path/to/covtype.data.gz` with
-`data_prepare.py`. Lifestyle is a synthetic dataset; Covertype uses the original
-54 input columns and seven classes.
-
-To reuse the supplied historical ACSEmployment data, graph, and checkpoints in a
-new directory, use the explicit import workflow:
-
-```bash
-python data_prepare.py --dataset ACSEmployment --root reproduction/historical --historical
-python Learn_causal_graph.py --dataset ACSEmployment --root reproduction/historical --historical
-python train.py --dataset ACSEmployment --root reproduction/historical --import-historical
-python RMIA.py --dataset ACSEmployment --root reproduction/historical --verify-historical
-```
-
-The historical workflow copies supplied artifacts; it does not reconstruct their
-original discovery process. Running ACSEmployment without these import options
-creates a fresh experiment and need not reproduce the saved historical results.
-Likewise, fresh downloads or a newly learned graph may differ from saved artifacts;
-use Sections 4 and 5 when the saved splits and graph are required.
-
-## 7. Output files
-
-| Output | Contents |
+| Column | Meaning |
 |---|---|
-| `results/<dataset>/comparison.csv` | Baseline RMIA, three feature strategies |
-| `results/<dataset>/loss_attack.csv` | Loss attack, three feature strategies |
-| `results/loss_attack.csv` | Combined loss-attack results for all datasets |
-| `random selection/results/comparison.csv` | Seven random-selection rows plus 21 baseline rows |
-| `adaptive attack/results/comparison.csv` | 21 adaptive RMIA rows, including calibrated variants |
-| `results/<dataset>/causal_graph.json` | Graph, feature sets, and data provenance |
-| Experiment `results/<dataset>/manifest.json` | Model/data hashes and experiment metadata |
+| `dataset` | Dataset name |
+| `experiment` | Feature-selection strategy |
+| `feature_count` | Number of retained original features |
+| `retained_features` | Names of retained features |
+| `target_test_accuracy` | Target prediction accuracy on its test set |
+| `rmia_auc` | Membership-inference ROC-AUC |
+| `rmia_best_accuracy` | Maximum empirical attack accuracy over score thresholds |
+| `tpr_at_1pct_fpr` | Maximum empirical TPR with FPR no greater than 1% |
+| `tpr_at_0_1pct_fpr` | Maximum empirical TPR with FPR no greater than 0.1% |
+| `rmia_a` | Selected RMIA correction parameter |
+| `gamma` | RMIA likelihood-ratio threshold |
 
-Custom `--root` or `--output` arguments relocate these outputs as shown above.
-Keep data, graphs, checkpoints, and manifests together: the scripts enforce hash
-consistency. Source paths recorded in experiment manifests are relative to the
-project root. Logs are optional and are not required by the reproduction scripts.
+Accuracy, AUC, and TPR values are fractions between 0 and 1. No additional script
+is needed to compute or save these statistics. These commands do not produce a
+combined CSV.
+
+To run only one dataset, execute its command in each of the three stages. To
+repeat the whole workflow, use a new output root and copy the supplied data into
+it first: graph learning and training refuse existing graph or nonempty model
+outputs. RMIA can be rerun on completed models and overwrites their result CSV.
+
+The supplied data and original experiment outputs remain unchanged in the project
+root. This workflow relearns graphs and retrains models; numerical agreement can
+depend on the package versions and computing environment. Use the pinned
+requirements and the graph-discovery hash seed above.
+
+
+## 4. Adaptive RMIA
+
+Complete Steps 1–3 for all seven datasets first. Continue running commands from
+the project directory. Use the newly generated `reproduction/main/` artifacts as
+the baseline and choose a new output directory:
+
+```text
+python -B "adaptive attack/run.py" --source reproduction/main --output reproduction/adaptive_attack
+```
+
+The command runs all seven datasets. It keeps the main experiment's target models
+and trains reference models using the same feature set as each target. Full-feature
+references are copied from the main experiment; identical feature sets can reuse
+references. Each target is attacked using eight feature-matched references.
+
+The attack uses the baseline `rmia_a` and `gamma` from Step 3. It also evaluates a
+separately calibrated `a` and records the calibrated metrics.
+
+Outputs:
+
+- `reproduction/adaptive_attack/models/<dataset>/<strategy>/ref0.pt` through `ref7.pt`.
+- `reproduction/adaptive_attack/results/<dataset>/comparison.csv`: three strategy rows.
+- `reproduction/adaptive_attack/results/comparison.csv`: 21 rows across seven datasets.
+- `reproduction/adaptive_attack/results/<dataset>/manifest.json`: experiment metadata.
+
+## 5. Loss attack
+
+Use the target models trained in Step 2. This attack requires no additional model
+training or reference models:
+
+```text
+python -B loss_attack.py --root reproduction/main
+```
+
+The command runs all seven datasets and all three target strategies. It uses each
+sample's negative cross-entropy loss as the membership score and computes AUC,
+TPR at 1% FPR, and TPR at 0.1% FPR. It does not use average training loss as a fixed
+membership-decision threshold.
+
+Outputs:
+
+- `reproduction/main/results/<dataset>/loss_attack.csv`: three strategy rows.
+- `reproduction/main/results/loss_attack.csv`: 21 rows across seven datasets.
+
+The main RMIA `comparison.csv` files are not overwritten.
+
+## 6. Random feature selection
+
+Complete Steps 1–3 first and use a new output directory:
+
+```text
+python -B "random selection/run.py" --source-root reproduction/main --output reproduction/random_selection --selection-seed 42
+```
+
+The command runs all seven datasets. For each dataset, it samples features without
+replacement from all original inputs, retaining the same number of features as
+the learned Markov blanket. Sampling uses seed 42; overlap with Markov-blanket
+features is allowed.
+
+It trains one new target model per dataset and copies the eight full-feature
+reference models from Step 2. It then runs non-adaptive RMIA using the baseline
+`rmia_a` and `gamma` from Step 3.
+
+Outputs:
+
+- `reproduction/random_selection/models/<dataset>/target_random_selection.pt`.
+- `reproduction/random_selection/models/<dataset>/ref0.pt` through `ref7.pt`.
+- `reproduction/random_selection/results/comparison.csv`: 28 rows, consisting of
+  seven new random-selection rows and 21 baseline rows copied from Step 3.
+- `reproduction/random_selection/results/<dataset>/attack_scores.npz`: saved attack scores.
+- `reproduction/random_selection/results/<dataset>/manifest.json`: selected features
+  and experiment metadata.
+
+## Running an additional attack on one dataset
+
+If Steps 1–3 were run for only one dataset, add the same `--dataset` argument to
+the additional attack command. For example:
+
+```text
+python -B "adaptive attack/run.py" --source reproduction/main --output reproduction/adaptive_public_coverage --dataset ACSPublicCoverage
+python -B loss_attack.py --root reproduction/main --dataset ACSPublicCoverage
+python -B "random selection/run.py" --source-root reproduction/main --output reproduction/random_public_coverage --selection-seed 42 --dataset ACSPublicCoverage
+```
+
+Single-dataset runs produce only that dataset's results. The loss attack's combined
+`results/loss_attack.csv` is generated only when all datasets are run. For adaptive
+RMIA and random selection, each invocation writes its own combined CSV for the
+datasets selected in that invocation; separate one-dataset runs do not append to
+an existing combined table.
+
+The adaptive and random-selection commands also support `--evaluate-only` after
+their respective output directories contain all required model checkpoints. This
+recomputes attacks without training models. Keep using `reproduction/main` as the
+source so data, graphs, baseline parameters, and model metadata stay aligned.

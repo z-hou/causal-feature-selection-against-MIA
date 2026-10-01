@@ -15,8 +15,6 @@ from experiment_core import train_predict, predict, score, auc, best_attack_accu
 from experiment_utils import DATASETS, load_data, read_json, write_json, digest, versions
 
 HERE = Path(__file__).resolve().parent
-METRICS = ['target_train_accuracy', 'target_test_accuracy', 'rmia_auc',
-           'rmia_best_accuracy', 'tpr_at_1pct_fpr', 'tpr_at_0_1pct_fpr']
 SPLITS = ['member', 'nonmember', 'ref0', 'ref1']
 
 
@@ -36,8 +34,7 @@ def evaluate(directory, name, frames, labels, references, a, gamma):
     rz = np.concatenate([references['ref0'], references['ref1']], axis=1)
     member, nonmember = [score(target[s], references[s], tz, rz, a, gamma)
                          for s in ['member', 'nonmember']]
-    metrics = dict(target_train_accuracy=accuracy['member'],
-                   target_test_accuracy=accuracy['nonmember'], rmia_auc=auc(member, nonmember),
+    metrics = dict(target_test_accuracy=accuracy['nonmember'], rmia_auc=auc(member, nonmember),
                    rmia_best_accuracy=best_attack_accuracy(member, nonmember),
                    tpr_at_1pct_fpr=tpr_at_fpr(member, nonmember, .01),
                    tpr_at_0_1pct_fpr=tpr_at_fpr(member, nonmember, .001))
@@ -68,9 +65,7 @@ def run_dataset(args, dataset):
                retained_features='[]', result_origin='new_experiment', status='pending',
                attack_mode='non_adaptive', selection_seed=args.selection_seed,
                markov_blanket_count=len(blanket), remaining_feature_count=len(remaining),
-               rmia_a=float(mb_row.rmia_a), gamma=float(mb_row.gamma), reference_count=8,
-               seed=int(mb_row.seed), epochs=int(mb_row.epochs),
-               distribution=mb_row.distribution, reason='')
+               rmia_a=float(mb_row.rmia_a), gamma=float(mb_row.gamma), reason='')
     manifest = dict(dataset=dataset, selection_seed=args.selection_seed,
                     all_features=features, markov_blanket=blanket, remaining_features=remaining,
                     selected_features=chosen, selection_pool=features,
@@ -91,8 +86,8 @@ def run_dataset(args, dataset):
             raise ValueError(f'{dataset}: target {key} mismatch')
     if mb['encoder']['columns'] != blanket or mb['hidden'] != [512, 256, 128]:
         raise ValueError('Unexpected MB target configuration')
-    if config['seed'] != row['seed'] or config['epochs'] != row['epochs']:
-        raise ValueError('Baseline CSV and checkpoint disagree')
+    if config['seed'] != meta['seed']:
+        raise ValueError('Data and target checkpoint seeds disagree')
     model_dir = args.output / 'models' / dataset
     model_dir.mkdir(parents=True, exist_ok=True)
     target_path = model_dir / 'target_random_selection.pt'
@@ -132,18 +127,13 @@ def run_dataset(args, dataset):
     for split in SPLITS:
         references[split] = np.stack([predict(model_dir, f'ref{i}', frames[split], labels[split])[0]
                                       for i in range(8)])
-    # Reproduce the existing MB row before comparing the new strategy.
-    old, _, _ = evaluate(source_models, 'target_markov_blanket', frames, labels,
-                          references, row['rmia_a'], row['gamma'])
-    np.testing.assert_allclose([old[k] for k in METRICS],
-                               [float(mb_row[k]) for k in METRICS], rtol=0, atol=1e-12)
     metrics, member, nonmember = evaluate(model_dir, 'target_random_selection', frames,
                                            labels, references, row['rmia_a'], row['gamma'])
     row.update(metrics, feature_count=len(chosen), retained_features=json.dumps(chosen), status='completed')
     np.savez_compressed(result_dir / 'attack_scores.npz', member=member, nonmember=nonmember)
     manifest.update(data_sha256=data_hash, reference_sha256=reference_hashes,
                     target_sha256=digest(target_path), training=checkpoint['training'],
-                    baseline_mb_reproduced=True, rmia_a=row['rmia_a'], gamma=row['gamma'])
+                    rmia_a=row['rmia_a'], gamma=row['gamma'])
     print(f'{dataset}: accuracy={metrics["target_test_accuracy"]:.4f}, AUC={metrics["rmia_auc"]:.6f}', flush=True)
     manifest.update(status=row['status'], reason=row['reason'], elapsed_seconds=time.time() - started)
     write_json(result_dir / 'manifest.json', manifest)

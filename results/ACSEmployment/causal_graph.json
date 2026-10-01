@@ -16,17 +16,12 @@
     "DREM",
     "SEX",
     "RAC1P",
-    "privacy_risk_score",
     "__label__"
   ],
   "edges": [
     [
       "AGEP",
-      "ESP"
-    ],
-    [
-      "AGEP",
-      "__label__"
+      "DEAR"
     ],
     [
       "AGEP",
@@ -38,23 +33,19 @@
     ],
     [
       "AGEP",
-      "DEAR"
+      "MIL"
     ],
     [
-      "MAR",
-      "SEX"
+      "AGEP",
+      "__label__"
     ],
     [
-      "RELP",
-      "MAR"
+      "CIT",
+      "NATIVITY"
     ],
     [
-      "RELP",
-      "AGEP"
-    ],
-    [
-      "DIS",
-      "DREM"
+      "CIT",
+      "RAC1P"
     ],
     [
       "DIS",
@@ -66,23 +57,11 @@
     ],
     [
       "DIS",
-      "CIT"
+      "DREM"
     ],
     [
-      "ESP",
-      "MIL"
-    ],
-    [
-      "CIT",
-      "RAC1P"
-    ],
-    [
-      "MIL",
-      "SCHL"
-    ],
-    [
-      "MIL",
-      "privacy_risk_score"
+      "MAR",
+      "SEX"
     ],
     [
       "MIL",
@@ -90,27 +69,31 @@
     ],
     [
       "MIL",
-      "__label__"
+      "ESP"
+    ],
+    [
+      "MIL",
+      "SCHL"
     ],
     [
       "MIL",
       "SEX"
     ],
     [
-      "ANC",
-      "NATIVITY"
+      "MIL",
+      "__label__"
     ],
     [
       "NATIVITY",
-      "CIT"
-    ],
-    [
-      "NATIVITY",
-      "RELP"
+      "ANC"
     ],
     [
       "NATIVITY",
       "DIS"
+    ],
+    [
+      "NATIVITY",
+      "MIG"
     ],
     [
       "NATIVITY",
@@ -118,19 +101,25 @@
     ],
     [
       "NATIVITY",
-      "MIG"
+      "RELP"
     ],
     [
-      "__label__",
-      "privacy_risk_score"
+      "RAC1P",
+      "ANC"
+    ],
+    [
+      "RELP",
+      "AGEP"
+    ],
+    [
+      "RELP",
+      "MAR"
     ],
     [
       "__label__",
       "DIS"
     ]
   ],
-  "mode": "historical",
-  "note": "Original graph includes privacy_risk_score. Only original input features are retained.",
   "feature_sets": {
     "all_features": [
       "AGEP",
@@ -161,5 +150,190 @@
       "NATIVITY"
     ]
   },
-  "data_sha256": "2c4d4c8ce69613c33a46c3ae8386dc9bef431c38529560e88664202fed403631"
+  "mode": "fresh",
+  "method": "discrete BIC hill climb",
+  "bins": 5,
+  "max_indegree": 3,
+  "max_iter": 10000,
+  "data_sha256": "2c4d4c8ce69613c33a46c3ae8386dc9bef431c38529560e88664202fed403631",
+  "discretization": {
+    "AGEP": {
+      "edges": [
+        0.0,
+        24.0,
+        37.0,
+        52.0,
+        66.0,
+        94.0
+      ]
+    },
+    "SCHL": {
+      "states": [
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0,
+        8.0,
+        9.0,
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0,
+        16.0,
+        17.0,
+        18.0,
+        19.0,
+        20.0,
+        21.0,
+        22.0,
+        23.0,
+        24.0
+      ]
+    },
+    "MAR": {
+      "states": [
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0
+      ]
+    },
+    "RELP": {
+      "states": [
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0,
+        8.0,
+        9.0,
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0,
+        16.0,
+        17.0
+      ]
+    },
+    "DIS": {
+      "states": [
+        1.0,
+        2.0
+      ]
+    },
+    "ESP": {
+      "states": [
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0,
+        8.0
+      ]
+    },
+    "CIT": {
+      "states": [
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0
+      ]
+    },
+    "MIG": {
+      "states": [
+        0.0,
+        1.0,
+        2.0,
+        3.0
+      ]
+    },
+    "MIL": {
+      "states": [
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0
+      ]
+    },
+    "ANC": {
+      "states": [
+        1.0,
+        2.0,
+        3.0,
+        4.0
+      ]
+    },
+    "NATIVITY": {
+      "states": [
+        1.0,
+        2.0
+      ]
+    },
+    "DEAR": {
+      "states": [
+        1.0,
+        2.0
+      ]
+    },
+    "DEYE": {
+      "states": [
+        1.0,
+        2.0
+      ]
+    },
+    "DREM": {
+      "states": [
+        0.0,
+        1.0,
+        2.0
+      ]
+    },
+    "SEX": {
+      "states": [
+        1.0,
+        2.0
+      ]
+    },
+    "RAC1P": {
+      "states": [
+        1.0,
+        2.0,
+        3.0,
+        5.0,
+        6.0,
+        7.0,
+        8.0,
+        9.0
+      ]
+    },
+    "__label__": {
+      "states": [
+        0,
+        1
+      ]
+    }
+  },
+  "pythonhashseed": "0",
+  "input_representation": "original saved feature columns",
+  "training_rows": 10000,
+  "model_preprocessing_applied": false,
+  "split_provenance": "saved input splits; graph learned anew",
+  "note": "Observational candidate DAG; edge directions are not established causal mechanisms."
 }

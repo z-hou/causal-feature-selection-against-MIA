@@ -1,4 +1,4 @@
-dataset,experiment,feature_count,retained_features,target_train_accuracy,target_test_accuracy,rmia_auc,rmia_best_accuracy,tpr_at_1pct_fpr,tpr_at_0_1pct_fpr,rmia_a,gamma,reference_count,seed,epochs,distribution
-ACSMobility,all_features,21,"[""AGEP"", ""SCHL"", ""MAR"", ""SEX"", ""DIS"", ""ESP"", ""CIT"", ""MIL"", ""ANC"", ""NATIVITY"", ""RELP"", ""DEAR"", ""DEYE"", ""DREM"", ""RAC1P"", ""GCL"", ""COW"", ""ESR"", ""WKHP"", ""JWMNP"", ""PINCP""]",0.9926,0.7207,0.717598925,0.6568,0.0663,0.019,0.0,2.0,8,42,100,same_state_year
-ACSMobility,label_parents,1,"[""RELP""]",0.775,0.7715,0.5004860050000001,0.5058,0.0109,0.0014,0.0,2.0,8,42,100,same_state_year
-ACSMobility,markov_blanket,1,"[""RELP""]",0.775,0.7715,0.5004860050000001,0.5058,0.0109,0.0014,0.0,2.0,8,42,100,same_state_year
+dataset,experiment,feature_count,retained_features,target_test_accuracy,rmia_auc,rmia_best_accuracy,tpr_at_1pct_fpr,tpr_at_0_1pct_fpr,rmia_a,gamma
+ACSMobility,all_features,21,"[""AGEP"", ""SCHL"", ""MAR"", ""SEX"", ""DIS"", ""ESP"", ""CIT"", ""MIL"", ""ANC"", ""NATIVITY"", ""RELP"", ""DEAR"", ""DEYE"", ""DREM"", ""RAC1P"", ""GCL"", ""COW"", ""ESR"", ""WKHP"", ""JWMNP"", ""PINCP""]",0.7207,0.717598925,0.6568,0.0663,0.019,0.0,2.0
+ACSMobility,label_parents,1,"[""RELP""]",0.7715,0.5004860050000001,0.5058,0.0109,0.0014,0.0,2.0
+ACSMobility,markov_blanket,1,"[""RELP""]",0.7715,0.5004860050000001,0.5058,0.0109,0.0014,0.0,2.0

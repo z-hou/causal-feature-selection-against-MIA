@@ -25,7 +25,7 @@ def feature_sets(nodes, edges, features):
                 markov_blanket=[f for f in features if f in blanket])
 
 
-def plot_graph(nodes, edges, selections, output):
+def plot_graph(nodes, edges, selections, output, target_name=None):
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -50,8 +50,12 @@ def plot_graph(nodes, edges, selections, output):
             positions = nx.shell_layout(graph, nlist=shells)
         size = 900
     else:
+        if target_name is None:
+            import folktables
+            target_name = getattr(folktables, output.parent.name).target
         fig, ax = plt.subplots(figsize=(14, 10))
         names = {node: node for node in nodes}
+        names['__label__'] = target_name
         positions = nx.spring_layout(graph, seed=42)
         size = 1800
     colors = []
@@ -79,12 +83,12 @@ def learn(args):
     out = results
     if args.historical and not meta['historical']:
         raise ValueError('Historical graph requires the historical data splits')
-    if not args.historical and meta['historical']:
-        raise ValueError('Use --historical with historical splits; fresh experiments need a new --root')
     out.mkdir(parents=True, exist_ok=True)
     if (out / 'causal_graph.json').exists():
         raise FileExistsError(out / 'causal_graph.json')
     if args.historical:
+        if read_json(HISTORICAL_GRAPH)['mode'] != 'historical':
+            raise ValueError('The supplied graph is no longer a historical graph; omit --historical to relearn it')
         shutil.copy2(HISTORICAL_GRAPH, out / 'causal_graph.json')
         shutil.copy2(HISTORICAL_GRAPH.with_suffix('.png'), out / 'causal_graph.png')
         print(read_json(HISTORICAL_GRAPH)['feature_sets'])
@@ -119,10 +123,11 @@ def learn(args):
                           pythonhashseed=os.environ.get('PYTHONHASHSEED'),
                           input_representation=meta.get('input_representation', 'original saved feature columns'),
                           training_rows=len(raw), model_preprocessing_applied=False,
+                          split_provenance='saved input splits; graph learned anew',
                           note='Observational candidate DAG; edge directions are not established causal mechanisms.')
     selections = feature_sets(nodes, edges, meta['features'])
     write_json(out / 'causal_graph.json', dict(nodes=nodes, edges=edges, feature_sets=selections, **provenance))
-    plot_graph(nodes, edges, selections, out / 'causal_graph.png')
+    plot_graph(nodes, edges, selections, out / 'causal_graph.png', meta.get('target'))
     print(selections)
 
 

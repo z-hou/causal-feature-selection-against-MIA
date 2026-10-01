@@ -8,12 +8,10 @@
   "attack": "non_adaptive RMIA; 8 unchanged full-feature references per dataset",
   "dataset_count": 7,
   "csv_rows": 28,
-  "verification": "All seven datasets passed verify.py; original MB metrics reproduced within 1e-12",
   "files_sha256": {
     "experiment_core.py": "b0ed348317b3fbc596b9b5f5e680e69e136e2b89718130bab729a24ed46e4158",
     "experiment_utils.py": "b8b23c89696f319c8b8601dd9858ed1ab82a723f7b954ed7f1318684d5e0f088",
-    "run.py": "7e53ac6fc5550983a450607b3a0af26a272351e1e57e7156090e55fc313dc0dd",
-    "verify.py": "9a5fa51899a6afdcbf009e9c6a5ce5c7c3d433ca0d595102ddf3240f386d0b88",
-    "results/comparison.csv": "aff12d1085f52a58ac8e0f0342c033373444518048a8bd0f00215097ec843131"
+    "run.py": "d2e9e225526562806414521304b6adfa43fa3af12d92b8c438748ab4d0b452f1",
+    "results/comparison.csv": "70622337885127a6c61950b3710233de74fa5c14a62c53d75119036d09297b90"
   }
 }

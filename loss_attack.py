@@ -45,7 +45,7 @@ def evaluate(root, dataset):
 
         # predict restores the checkpoint's fitted encoder and returns log p(y|x).
         # Keep log probabilities directly to avoid probability clipping/underflow.
-        member, train_accuracy = predict(models, name, frames['member'], labels['member'])
+        member, _ = predict(models, name, frames['member'], labels['member'])
         nonmember, test_accuracy = predict(models, name, frames['nonmember'], labels['nonmember'])
         for scores in [member, nonmember]:
             if not np.isfinite(scores).all() or (scores > 1e-10).any():
@@ -61,8 +61,7 @@ def evaluate(root, dataset):
             tpr_at_0_1pct_fpr=tpr_at_fpr(member, nonmember, 0.001),
             member_mean_loss=float(-member.mean()),
             nonmember_mean_loss=float(-nonmember.mean()),
-            target_train_accuracy=train_accuracy, target_test_accuracy=test_accuracy,
-            seed=training['seed'], epochs=training['epochs'],
+            target_test_accuracy=test_accuracy,
             data_sha256=data_hash, graph_sha256=graph_hash,
             model_sha256=digest(models / f'{name}.pt')))
 

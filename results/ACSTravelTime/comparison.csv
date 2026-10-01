@@ -1,4 +1,4 @@
-dataset,experiment,feature_count,retained_features,target_train_accuracy,target_test_accuracy,rmia_auc,rmia_best_accuracy,tpr_at_1pct_fpr,tpr_at_0_1pct_fpr,rmia_a,gamma,reference_count,seed,epochs,distribution
-ACSTravelTime,all_features,16,"[""AGEP"", ""SCHL"", ""MAR"", ""SEX"", ""DIS"", ""ESP"", ""MIG"", ""RELP"", ""RAC1P"", ""PUMA"", ""ST"", ""CIT"", ""OCCP"", ""JWTR"", ""POWPUMA"", ""POVPIP""]",0.9979,0.6076,0.764087905,0.72035,0.042,0.0072,0.0,2.0,8,42,100,same_state_year
-ACSTravelTime,label_parents,1,"[""JWTR""]",0.5765,0.5597,0.494451425,0.50125,0.0089,0.0009,0.0,2.0,8,42,100,same_state_year
-ACSTravelTime,markov_blanket,4,"[""AGEP"", ""MAR"", ""SEX"", ""JWTR""]",0.6227,0.5975,0.5094644150000001,0.50775,0.015,0.003,0.0,2.0,8,42,100,same_state_year
+dataset,experiment,feature_count,retained_features,target_test_accuracy,rmia_auc,rmia_best_accuracy,tpr_at_1pct_fpr,tpr_at_0_1pct_fpr,rmia_a,gamma
+ACSTravelTime,all_features,16,"[""AGEP"", ""SCHL"", ""MAR"", ""SEX"", ""DIS"", ""ESP"", ""MIG"", ""RELP"", ""RAC1P"", ""PUMA"", ""ST"", ""CIT"", ""OCCP"", ""JWTR"", ""POWPUMA"", ""POVPIP""]",0.6076,0.764087905,0.72035,0.042,0.0072,0.0,2.0
+ACSTravelTime,label_parents,1,"[""JWTR""]",0.5597,0.494451425,0.50125,0.0089,0.0009,0.0,2.0
+ACSTravelTime,markov_blanket,4,"[""AGEP"", ""MAR"", ""SEX"", ""JWTR""]",0.5975,0.5094644150000001,0.50775,0.015,0.003,0.0,2.0
