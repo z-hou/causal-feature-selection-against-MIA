@@ -1,9 +1,9 @@
 # Reproducing the Experiments
 Main experiment: we conduct three feature selection strategies under RMIA attack,
 
-Addition experiment 1: Adaptive attack  
-Addition experiment 2: Three feature selection strategies under Loss-based attack  
-Addition experiment 3: Causal feature selection(Markov blanket) Vs Random selection  
+Addition experiment 1: Adaptive attack
+Addition experiment 2: Three feature selection strategies under Loss-based attack
+Addition experiment 3: Causal feature selection(Markov blanket) Vs Random selection 
 
 The prepared datasets are saved in directory "data", Main experiment contains three stages:
 
@@ -14,6 +14,8 @@ The prepared datasets are saved in directory "data", Main experiment contains th
 This workflow uses the existing data splits. No data downloading, generation, or
 splitting is required. Steps 1–3 reproduce the main experiment. Steps 4–6 run
 adaptive RMIA, the loss attack, and random feature selection using those outputs.
+
+For end to end reproduce, run "bash -e reproduce_all.sh"
 
 ## Preparation
 
