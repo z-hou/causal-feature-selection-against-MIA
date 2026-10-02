@@ -2,11 +2,13 @@
 # The -e option stops execution if a command fails; -B prevents Python bytecode caches.
 # Preparation (see README.md):
 # - Install requirements.txt in the active Python 3.11 environment.
-# - Set PYTHONHASHSEED=0 in the environment before running this script.
 # - Copy the supplied data/ folder to reproduction/main/data/.
 # - Start without reproduction/main/models/ or reproduction/main/results/,
 #   and without reproduction/adaptive_attack/ or reproduction/random_selection/.
 # No data generation or downloading is performed.
+
+# Fix Python hash ordering before starting any Python process.
+export PYTHONHASHSEED=0
 
 # 1. Learn causal graphs and extract label parents and Markov blankets.
 # Outputs: reproduction/main/results/<dataset>/causal_graph.json and .png.
