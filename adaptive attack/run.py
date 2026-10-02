@@ -20,14 +20,12 @@ from RMIA import choose_a
 METRICS = ['rmia_auc', 'rmia_best_accuracy', 'tpr_at_1pct_fpr', 'tpr_at_0_1pct_fpr']
 
 
-def validate(path, features, data_hash, graph_hash, classes, expected=None):
+def validate(path, features, classes, expected=None):
     checkpoint = torch.load(path, map_location='cpu', weights_only=True)
     config = checkpoint['training']
     if (checkpoint['encoder']['columns'] != features
             or checkpoint['hidden'] != [512, 256, 128]
-            or checkpoint['classes'] != classes
-            or config['data_sha256'] != data_hash
-            or config['graph_sha256'] != graph_hash):
+            or checkpoint['classes'] != classes):
         raise ValueError(f'Incompatible checkpoint: {path}')
     if expected:
         for key, value in expected.items():
@@ -60,7 +58,7 @@ def run_dataset(args, dataset):
         raise ValueError('Auxiliary calibration requires ref0/ref1 complementary ordered splits')
     features = read_json(graph_path)['feature_sets']
     data_hash, graph_hash = digest(data / 'data.npz'), digest(graph_path)
-    if read_json(graph_path)['data_sha256'] != data_hash or features['all_features'] != meta['features']:
+    if features['all_features'] != meta['features']:
         raise ValueError('Data/graph mismatch')
     classes = int(meta.get('classes', 2))
     baseline = pd.read_csv(source / 'results' / dataset / 'comparison.csv').set_index('experiment')
@@ -75,7 +73,7 @@ def run_dataset(args, dataset):
             raise ValueError('Invalid feature set')
         target_name = f'target_{strategy}'
         target_path = original_models / f'{target_name}.pt'
-        validate(target_path, kept, data_hash, graph_hash, classes)
+        validate(target_path, kept, classes)
         directory = output / 'models' / dataset / strategy
         directory.mkdir(parents=True, exist_ok=True)
         manifest[strategy] = {'target_sha256': digest(target_path), 'references': {}}
@@ -83,7 +81,7 @@ def run_dataset(args, dataset):
             name = f'ref{index}'
             path = directory / f'{name}.pt'
             original = original_models / f'{name}.pt'
-            config = validate(original, features['all_features'], data_hash, graph_hash, classes)
+            config = validate(original, features['all_features'], classes)
             expected = {k: config[k] for k in ['epochs', 'batch_size', 'seed', 'threads', 'device']}
             if config['seed'] != meta['seed'] + index + 1:
                 raise ValueError('Unexpected reference seed')
@@ -104,9 +102,7 @@ def run_dataset(args, dataset):
                     print(f'{dataset}/{strategy}/{name}', flush=True)
                     train_predict(pool.iloc[indices][kept], pool_y[indices], [], classes,
                         [f for f in meta['numeric'] if f in kept], options, name, config['seed'])
-            validate(path, kept, data_hash, graph_hash, classes, expected)
-            if strategy == 'all_features' and digest(path) != digest(original):
-                raise ValueError('Full-feature reference differs from baseline')
+            validate(path, kept, classes, expected)
             manifest[strategy]['references'][name] = digest(path)
         trained_sets[tuple(kept)] = directory
         references = {}

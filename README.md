@@ -1,6 +1,11 @@
 # Reproducing the Experiments
+Main experiment: we conduct three feature selection strategies under RMIA attack,
 
-Use the supplied data and run these three stages:
+Addition experiment 1: Adaptive attack
+Addition experiment 2: Three feature selection strategies under Loss-based attack
+Addition experiment 3: Causal feature selection(Markov blanket) Vs Random selection 
+
+The prepared datasets are saved in directory "data", Main experiment contains three stages:
 
 1. Learn the causal graph and extract the target's parents and Markov blanket.
 2. Train the target models and reference models.
@@ -81,8 +86,7 @@ Each command trains:
   for all three target strategies.
 
 The MLP has hidden layers `(512, 256, 128)`. Training uses 100 epochs, batch size
-256, two CPU threads, and the seeds recorded in the supplied data. For the supplied
-datasets, target seed is 42 and reference seeds are 43 through 50.
+256, two CPU threads.
 
 ```text
 python -B train.py --dataset ACSEmployment --root reproduction/main --epochs 100 --batch-size 256 --threads 2
@@ -100,11 +104,10 @@ Each dataset produces 11 checkpoints in `reproduction/main/models/<dataset>/`:
 target_all_features.pt
 target_label_parents.pt
 target_markov_blanket.pt
-ref0.pt ... ref7.pt
+8 reference models: ref0.pt ... ref7.pt
 ```
 
-Each checkpoint includes the model weights, fitted feature encoder, and training
-metadata. The target has 10,000 training and 10,000 test records. Each reference
+The target has 10,000 training and 10,000 test records. Each reference
 uses 10,000 training and 10,000 test records from its separate reference pool.
 All models are newly trained; no existing weights are imported.
 
@@ -146,24 +149,10 @@ rows: `all_features`, `label_parents`, and `markov_blanket`.
 | `rmia_a` | Selected RMIA correction parameter |
 | `gamma` | RMIA likelihood-ratio threshold |
 
-Accuracy, AUC, and TPR values are fractions between 0 and 1. No additional script
-is needed to compute or save these statistics. These commands do not produce a
-combined CSV.
-
-To run only one dataset, execute its command in each of the three stages. To
-repeat the whole workflow, use a new output root and copy the supplied data into
-it first: graph learning and training refuse existing graph or nonempty model
-outputs. RMIA can be rerun on completed models and overwrites their result CSV.
-
-The supplied data and original experiment outputs remain unchanged in the project
-root. This workflow relearns graphs and retrains models; numerical agreement can
-depend on the package versions and computing environment. Use the pinned
-requirements and the graph-discovery hash seed above.
-
 
 ## 4. Adaptive RMIA
 
-Complete Steps 1–3 for all seven datasets first. Continue running commands from
+Important!!! Complete Steps 1–3 for all seven datasets first (Mandatory). Continue running commands from
 the project directory. Use the newly generated `reproduction/main/` artifacts as
 the baseline and choose a new output directory:
 
@@ -184,7 +173,6 @@ Outputs:
 - `reproduction/adaptive_attack/models/<dataset>/<strategy>/ref0.pt` through `ref7.pt`.
 - `reproduction/adaptive_attack/results/<dataset>/comparison.csv`: three strategy rows.
 - `reproduction/adaptive_attack/results/comparison.csv`: 21 rows across seven datasets.
-- `reproduction/adaptive_attack/results/<dataset>/manifest.json`: experiment metadata.
 
 ## 5. Loss attack
 
@@ -217,7 +205,7 @@ python -B "random selection/run.py" --source-root reproduction/main --output rep
 
 The command runs all seven datasets. For each dataset, it samples features without
 replacement from all original inputs, retaining the same number of features as
-the learned Markov blanket. Sampling uses seed 42; overlap with Markov-blanket
+the learned Markov blanket. Overlap with Markov-blanket
 features is allowed.
 
 It trains one new target model per dataset and copies the eight full-feature
@@ -230,28 +218,4 @@ Outputs:
 - `reproduction/random_selection/models/<dataset>/ref0.pt` through `ref7.pt`.
 - `reproduction/random_selection/results/comparison.csv`: 28 rows, consisting of
   seven new random-selection rows and 21 baseline rows copied from Step 3.
-- `reproduction/random_selection/results/<dataset>/attack_scores.npz`: saved attack scores.
-- `reproduction/random_selection/results/<dataset>/manifest.json`: selected features
-  and experiment metadata.
 
-## Running an additional attack on one dataset
-
-If Steps 1–3 were run for only one dataset, add the same `--dataset` argument to
-the additional attack command. For example:
-
-```text
-python -B "adaptive attack/run.py" --source reproduction/main --output reproduction/adaptive_public_coverage --dataset ACSPublicCoverage
-python -B loss_attack.py --root reproduction/main --dataset ACSPublicCoverage
-python -B "random selection/run.py" --source-root reproduction/main --output reproduction/random_public_coverage --selection-seed 42 --dataset ACSPublicCoverage
-```
-
-Single-dataset runs produce only that dataset's results. The loss attack's combined
-`results/loss_attack.csv` is generated only when all datasets are run. For adaptive
-RMIA and random selection, each invocation writes its own combined CSV for the
-datasets selected in that invocation; separate one-dataset runs do not append to
-an existing combined table.
-
-The adaptive and random-selection commands also support `--evaluate-only` after
-their respective output directories contain all required model checkpoints. This
-recomputes attacks without training models. Keep using `reproduction/main` as the
-source so data, graphs, baseline parameters, and model metadata stay aligned.

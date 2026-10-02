@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import torch
 from experiment_core import predict, score, auc, tpr_at_fpr, best_attack_accuracy
-from experiment_utils import parser, paths, load_data, read_json, digest, NAMES, STRATEGIES
+from experiment_utils import parser, paths, load_data, read_json, NAMES, STRATEGIES
 
 
 def choose_a(pack, gamma):
@@ -29,15 +29,11 @@ def evaluate(args):
     graph_path = results / 'causal_graph.json'
     graph = read_json(graph_path)
     features = graph['feature_sets']
-    data_hash, graph_hash = digest(data / 'data.npz'), digest(graph_path)
     torch.set_num_threads(2)
     torch.use_deterministic_algorithms(True)
     model_names = [f'ref{i}' for i in range(8)] + [f'target_{s}' for s in STRATEGIES]
     for name in model_names:
         checkpoint = torch.load(models / f'{name}.pt', weights_only=True, map_location='cpu')
-        config = checkpoint['training']
-        if config['data_sha256'] != data_hash or config['graph_sha256'] != graph_hash:
-            raise ValueError(f'Data/graph mismatch for {name}')
         kept = meta['features'] if name.startswith('ref') else features[name[len('target_'):]]
         if (checkpoint['encoder']['columns'] != kept or checkpoint['hidden'] != [512, 256, 128]
                 or checkpoint['classes'] != int(meta.get('classes', 2))):

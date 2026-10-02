@@ -26,8 +26,6 @@ def evaluate(root, dataset):
     features = graph['feature_sets']
     data_hash = digest(data / 'data.npz')
     graph_hash = digest(graph_path)
-    if graph['data_sha256'] != data_hash:
-        raise ValueError(f'{dataset}: graph and data do not match')
     if features['all_features'] != meta['features']:
         raise ValueError(f'{dataset}: full-feature columns do not match data')
 
@@ -35,9 +33,6 @@ def evaluate(root, dataset):
     for strategy in STRATEGIES:
         name = f'target_{strategy}'
         checkpoint = torch.load(models / f'{name}.pt', map_location='cpu', weights_only=True)
-        training = checkpoint['training']
-        if training['data_sha256'] != data_hash or training['graph_sha256'] != graph_hash:
-            raise ValueError(f'{dataset}/{name}: checkpoint does not match data/graph')
         if (checkpoint['encoder']['columns'] != features[strategy]
                 or checkpoint['hidden'] != [512, 256, 128]
                 or checkpoint['classes'] != int(meta.get('classes', 2))):

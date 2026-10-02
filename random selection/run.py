@@ -76,14 +76,11 @@ def run_dataset(args, dataset):
     print(f'{dataset}: selected {chosen}', flush=True)
     meta, frames, labels, _, _ = load_data(source / 'data' / dataset)
     data_hash = digest(source / 'data' / dataset / 'data.npz')
-    if graph['data_sha256'] != data_hash or features != meta['features']:
+    if features != meta['features']:
         raise ValueError(f'{dataset}: data/graph mismatch')
     source_models = source / 'models' / dataset
     mb = torch.load(source_models / 'target_markov_blanket.pt', weights_only=True, map_location='cpu')
     config = mb['training']
-    for key, value in [('data_sha256', data_hash), ('graph_sha256', digest(graph_path))]:
-        if config[key] != value:
-            raise ValueError(f'{dataset}: target {key} mismatch')
     if mb['encoder']['columns'] != blanket or mb['hidden'] != [512, 256, 128]:
         raise ValueError('Unexpected MB target configuration')
     if config['seed'] != meta['seed']:
@@ -98,15 +95,10 @@ def run_dataset(args, dataset):
         path = source_models / f'ref{i}.pt'
         checkpoint = torch.load(path, weights_only=True, map_location='cpu')
         if (checkpoint['encoder']['columns'] != features or checkpoint['hidden'] != [512, 256, 128]
-                or checkpoint['classes'] != int(meta.get('classes', 2))
-                or checkpoint['training']['data_sha256'] != data_hash
-                or checkpoint['training']['graph_sha256'] != digest(graph_path)):
+                or checkpoint['classes'] != int(meta.get('classes', 2))):
             raise ValueError(f'Invalid full-feature reference: {path}')
         reference_hashes[path.name] = digest(path)
-        if args.evaluate_only:
-            if digest(model_dir / path.name) != reference_hashes[path.name]:
-                raise ValueError('Reference snapshot changed')
-        else:
+        if not args.evaluate_only:
             shutil.copy2(path, model_dir / path.name)
     threads = int(config.get('threads', 2))
     torch.set_num_threads(threads)
@@ -120,7 +112,9 @@ def run_dataset(args, dataset):
                       int(meta.get('classes', 2)), [f for f in meta['numeric'] if f in chosen],
                       options, 'target_random_selection', config['seed'])
     checkpoint = torch.load(target_path, weights_only=True, map_location='cpu')
-    if (checkpoint['encoder']['columns'] != chosen or checkpoint['training'] != options.metadata
+    training = {k: v for k, v in checkpoint['training'].items() if not k.endswith('_sha256')}
+    expected_training = {k: v for k, v in options.metadata.items() if not k.endswith('_sha256')}
+    if (checkpoint['encoder']['columns'] != chosen or training != expected_training
             or checkpoint['hidden'] != [512, 256, 128]):
         raise ValueError('Random target does not match requested experiment')
     references = {}

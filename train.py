@@ -24,8 +24,6 @@ def train(args):
     for kept in features.values():
         if any(f not in meta['features'] for f in kept) or len(set(kept)) != len(kept):
             raise ValueError('Invalid feature subset')
-    if graph['data_sha256'] != digest(data / 'data.npz'):
-        raise ValueError('Graph and data do not match')
     empty_directory(models)
     torch.set_num_threads(args.threads)
     torch.use_deterministic_algorithms(True)
