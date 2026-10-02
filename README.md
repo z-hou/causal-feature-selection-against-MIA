@@ -1,9 +1,9 @@
 # Reproducing the Experiments
 Main experiment: we conduct three feature selection strategies under RMIA attack,
 
-Addition experiment 1: Adaptive attack
-Addition experiment 2: Three feature selection strategies under Loss-based attack
-Addition experiment 3: Causal feature selection(Markov blanket) Vs Random selection 
+Addition experiment 1: Adaptive attack  
+Addition experiment 2: Three feature selection strategies under Loss-based attack  
+Addition experiment 3: Causal feature selection(Markov blanket) Vs Random selection  
 
 The prepared datasets are saved in directory "data", Main experiment contains three stages:
 
